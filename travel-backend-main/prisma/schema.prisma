@@ -1,0 +1,599 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model blog_posts {
+  id      BigInt    @id @default(autoincrement())
+  title   String?
+  date    DateTime? @db.Date
+  author  String?
+  image   String?
+  content String?
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model blogs {
+  id           BigInt        @id @default(autoincrement())
+  title        String
+  slug         String        @unique
+  summary      String?
+  content      String?
+  author       String?       @default("Admin")
+  category     String
+  tags         String[]      @default([])
+  image        String?
+  published_at DateTime?     @db.Date
+  views        Int?          @default(0)
+  published    Boolean?      @default(false)
+  created_at   DateTime?     @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime?     @default(now()) @db.Timestamptz(6)
+  deleted_at   DateTime?     @db.Timestamptz(6)
+  comments     BlogComment[]
+}
+
+model BlogComment {
+  id          BigInt   @id @default(autoincrement())
+  blogId      BigInt   @map("blog_id")
+  authorName  String   @map("author_name")
+  authorEmail String   @map("author_email")
+  content     String   @db.Text
+  parentId    BigInt?  @map("parent_id")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  blog    blogs         @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  parent  BlogComment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies BlogComment[] @relation("CommentReplies")
+
+  @@map("blog_comments")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model bookings {
+  id             BigInt    @id @default(autoincrement())
+  name           String?
+  email          String?
+  phone          String?
+  room_type      String?
+  checkin        DateTime? @db.Date
+  checkout       DateTime? @db.Date
+  guests         Int?
+  status         String?   @default("pending")
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  booking_type   String?   @default("hotel")
+  item_id        BigInt?
+  total_price    Decimal?  @db.Decimal
+  payment_status String?   @default("unpaid")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model contacts {
+  id         BigInt    @id @default(autoincrement())
+  name       String?
+  email      String?
+  subject    String?
+  message    String?
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model rooms {
+  id        BigInt   @id @default(autoincrement())
+  name      String?
+  price     Decimal? @db.Decimal
+  type      String?
+  capacity  Int?
+  image     String?
+  available Boolean? @default(true)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Tour {
+  id           Int           @id @default(autoincrement())
+  title        String
+  slug         String        @unique
+  description  String
+  location     String
+  price        Float
+  duration     String
+  maxGuests    Int
+  thumbnail    String
+  gallery      String[]      @default([])
+  rating       Float         @default(0.0)
+  reviewCount  Int           @default(0) @map("review_count")
+  bookingCount Int           @default(0)
+  status       String        @default("active")
+  createdAt    DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime      @updatedAt @db.Timestamptz(6)
+  deletedAt    DateTime?     @db.Timestamptz(6)
+  bookings     TourBooking[]
+  images       TourImage[]
+
+  @@index([status])
+  @@index([location])
+  @@map("tours")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model users {
+  id                 BigInt                   @id @default(autoincrement())
+  name               String
+  email              String                   @unique
+  password           String
+  role               Role                     @default(CUSTOMER)
+  status             String?                  @default("active")
+  refresh_token      String?
+  created_at         DateTime?                @default(now()) @db.Timestamptz(6)
+  deletedAt          DateTime?                @map("deleted_at") @db.Timestamptz(6)
+  tour_bookings      TourBooking[]
+  voucher_orders     VoucherOrder[]
+  hotel_bookings     HotelBooking[]
+  payments           Payment[]
+  wishlist_items     WishlistItem[]
+  notifications      Notification[]
+  reviews            Review[]
+  corporate_vouchers CorporateVoucher[]
+  assigned_vouchers  CorporateVoucher[]       @relation("VoucherAssigner")
+  redeemed_vouchers  CorporateVoucher[]       @relation("VoucherRedeemer")
+  cancelled_vouchers CorporateVoucher[]       @relation("VoucherCanceller")
+  created_batches    CorporatePurchaseBatch[] @relation("BatchCreator")
+  company_batches    CorporatePurchaseBatch[]
+
+  @@index([role])
+}
+
+enum Role {
+  CUSTOMER
+  STAFF
+  ADMIN
+}
+
+enum VoucherStatus {
+  ACTIVE
+  INACTIVE
+  SOLD_OUT
+  EXPIRED
+}
+
+enum VoucherOrderStatus {
+  PENDING_PAYMENT
+  PAID
+  CANCELLED
+  USED
+  EXPIRED
+}
+
+model Voucher {
+  id                       BigInt                   @id @default(autoincrement())
+  description              String
+  resortName               String                   @map("resort_name")
+  originalPrice            Decimal                  @map("original_price") @db.Decimal(10, 2)
+  salePrice                Decimal                  @map("sale_price") @db.Decimal(10, 2)
+  image                    String?
+  validUntil               DateTime                 @map("valid_until") @db.Timestamptz(6)
+  quantity                 Int                      @default(10)
+  createdAt                DateTime                 @default(now()) @map("created_at") @db.Timestamptz(6)
+  remainingQuantity        Int                      @default(10) @map("remaining_quantity")
+  status                   VoucherStatus            @default(ACTIVE)
+  title                    String
+  updatedAt                DateTime                 @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt                DateTime?                @map("deleted_at") @db.Timestamptz(6)
+  orders                   VoucherOrder[]
+  corporatePurchaseBatches CorporatePurchaseBatch[]
+
+  @@index([status])
+  @@index([validUntil])
+  @@map("vouchers")
+}
+
+model VoucherOrder {
+  id          BigInt             @id @default(autoincrement())
+  voucherId   BigInt             @map("voucher_id")
+  userId      BigInt?            @map("user_id")
+  fullName    String             @map("full_name")
+  email       String
+  phone       String
+  quantity    Int                @default(1)
+  totalPrice  Decimal            @map("total_price") @db.Decimal(10, 2)
+  status      VoucherOrderStatus @default(PENDING_PAYMENT)
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt   DateTime?          @map("deleted_at") @db.Timestamptz(6)
+  user        users?             @relation(fields: [userId], references: [id])
+  voucher     Voucher            @relation(fields: [voucherId], references: [id], onDelete: Cascade)
+  payments    Payment[]
+  items       VoucherOrderItem[]
+
+  @@index([status])
+  @@index([userId])
+  @@map("voucher_orders")
+}
+
+model VoucherOrderItem {
+  id             BigInt             @id @default(autoincrement())
+  voucherOrderId BigInt             @map("voucher_order_id")
+  voucherCode    String             @unique @map("voucher_code")
+  status         VoucherOrderStatus @default(PAID)
+  redeemedAt     DateTime?          @map("redeemed_at") @db.Timestamptz(6)
+  order          VoucherOrder       @relation(fields: [voucherOrderId], references: [id], onDelete: Cascade)
+
+  @@index([voucherCode])
+  @@index([status])
+  @@map("voucher_order_items")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Apartment {
+  id          Int              @id @default(autoincrement())
+  title       String
+  description String
+  location    String
+  address     String
+  price       Float
+  maxGuests   Int
+  bedrooms    Int
+  bathrooms   Int
+  thumbnail   String
+  rating      Float            @default(0.0)
+  reviewCount Int              @default(0) @map("review_count")
+  status      String           @default("available")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  deletedAt   DateTime?        @map("deleted_at") @db.Timestamptz(6)
+  gallery     String[]         @default([])
+  images      ApartmentImage[]
+
+  @@index([status])
+  @@index([location])
+  @@map("apartments")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ApartmentImage {
+  id          Int       @id @default(autoincrement())
+  apartmentId Int       @map("apartment_id")
+  imageUrl    String    @map("image_url")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  type        String    @default("gallery")
+  apartment   Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+
+  @@map("apartment_images")
+}
+
+model TourImage {
+  id        Int      @id @default(autoincrement())
+  tourId    Int      @map("tour_id")
+  imageUrl  String   @map("image_url")
+  type      String   @default("gallery")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  @@map("tour_images")
+}
+
+model Room {
+  id            Int            @id @default(autoincrement())
+  hotelId       Int            @map("hotel_id")
+  name          String
+  type          String
+  description   String
+  price         Float
+  maxGuests     Int            @map("max_guests")
+  beds          Int            @default(1)
+  bathrooms     Int            @default(1)
+  thumbnail     String
+  gallery       String[]       @default([])
+  amenities     String[]       @default([])
+  status        String         @default("available")
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt     DateTime?      @map("deleted_at") @db.Timestamptz(6)
+  hotel         Hotel          @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  images        RoomImage[]
+  hotelBookings HotelBooking[]
+
+  @@index([hotelId])
+  @@index([status])
+  @@map("hotel_rooms")
+}
+
+model RoomImage {
+  id        Int      @id @default(autoincrement())
+  roomId    Int      @map("room_id")
+  imageUrl  String   @map("image_url")
+  type      String   @default("gallery")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@map("hotel_room_images")
+}
+
+model Hotel {
+  id           Int          @id @default(autoincrement())
+  name         String
+  slug         String       @unique
+  description  String
+  location     String
+  address      String
+  starRating   Int          @default(3) @map("star_rating")
+  price        Float
+  thumbnail    String
+  gallery      String[]     @default([])
+  amenities    String[]     @default([])
+  rating       Float        @default(0.0)
+  reviewCount  Int          @default(0) @map("review_count")
+  bookingCount Int          @default(0) @map("booking_count")
+  featured     Boolean      @default(false)
+  status       String       @default("active")
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt    DateTime?    @map("deleted_at") @db.Timestamptz(6)
+  images       HotelImage[]
+  rooms        Room[]
+
+  @@index([status])
+  @@index([location])
+  @@index([featured])
+  @@index([starRating])
+  @@map("hotels")
+}
+
+model HotelImage {
+  id        Int      @id @default(autoincrement())
+  hotelId   Int      @map("hotel_id")
+  imageUrl  String   @map("image_url")
+  type      String   @default("gallery")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  hotel     Hotel    @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  @@map("hotel_images")
+}
+
+model TourBooking {
+  id            Int       @id @default(autoincrement())
+  tourId        Int       @map("tour_id")
+  userId        BigInt?   @map("user_id")
+  fullName      String    @map("full_name")
+  email         String
+  phone         String
+  totalPrice    Float     @map("total_price")
+  status        String    @default("pending")
+  paymentStatus String    @default("unpaid") @map("payment_status")
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt     DateTime? @map("deleted_at") @db.Timestamptz(6)
+  bookingDate   DateTime  @map("booking_date") @db.Date
+  guests        Int       @default(1)
+  tour          Tour      @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  user          users?    @relation(fields: [userId], references: [id])
+  payments      Payment[]
+
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([tourId])
+  @@map("tour_bookings")
+}
+
+model HotelBooking {
+  id            Int       @id @default(autoincrement())
+  userId        BigInt?   @map("user_id")
+  roomId        Int       @map("room_id")
+  fullName      String    @map("full_name")
+  email         String
+  phone         String
+  checkIn       DateTime  @map("check_in") @db.Date
+  checkOut      DateTime  @map("check_out") @db.Date
+  guests        Int       @default(1)
+  totalPrice    Float     @map("total_price")
+  status        String    @default("pending")
+  paymentStatus String    @default("unpaid") @map("payment_status")
+  notes         String?
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt     DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user     users?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  room     Room      @relation(fields: [roomId], references: [id], onDelete: Restrict)
+  payments Payment[]
+
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([roomId])
+  @@map("hotel_bookings")
+}
+
+model Payment {
+  id                 Int       @id @default(autoincrement())
+  bookingType        String    @default("HOTEL") @map("booking_type")
+  bookingId          Int?      @map("booking_id")
+  tourBookingId      Int?      @map("tour_booking_id")
+  apartmentBookingId BigInt?   @map("apartment_booking_id")
+  voucherOrderId     BigInt?   @map("voucher_order_id")
+  corporateBatchId   BigInt?   @map("corporate_batch_id")
+  userId             BigInt?   @map("user_id")
+  amount             Float
+  method             String    @default("bank_transfer")
+  status             String    @default("pending")
+  transactionId      String?   @unique @map("transaction_id")
+  paidAt             DateTime? @map("paid_at") @db.Timestamptz(6)
+  refundedAt         DateTime? @map("refunded_at") @db.Timestamptz(6)
+  notes              String?
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  booking        HotelBooking?           @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  tourBooking    TourBooking?            @relation(fields: [tourBookingId], references: [id], onDelete: Cascade)
+  voucherOrder   VoucherOrder?           @relation(fields: [voucherOrderId], references: [id], onDelete: Cascade)
+  user           users?                  @relation(fields: [userId], references: [id])
+  corporateBatch CorporatePurchaseBatch? @relation(fields: [corporateBatchId], references: [id])
+
+  @@index([bookingId])
+  @@index([bookingType, status])
+  @@index([status])
+  @@map("payments")
+}
+
+enum ItemType {
+  HOTEL
+  TOUR
+  APARTMENT
+}
+
+enum NotificationType {
+  BOOKING_SUCCESS
+  PAYMENT_SUCCESS
+  BOOKING_CANCELLED
+  VOUCHER_NOTIFICATION
+}
+
+model WishlistItem {
+  id        BigInt   @id @default(autoincrement())
+  userId    BigInt   @map("user_id")
+  itemId    BigInt   @map("item_id")
+  itemType  ItemType @map("item_type")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, itemId, itemType])
+  @@map("wishlist_items")
+}
+
+model Notification {
+  id        BigInt           @id @default(autoincrement())
+  userId    BigInt           @map("user_id")
+  title     String
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false) @map("is_read")
+  createdAt DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model Review {
+  id           BigInt   @id @default(autoincrement())
+  userId       BigInt   @map("user_id")
+  targetId     BigInt   @map("target_id")
+  targetType   ItemType @map("target_type")
+  rating       Int
+  comment      String?  @db.Text
+  isReported   Boolean  @default(false) @map("is_reported")
+  reportReason String?  @map("report_reason") @db.Text
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetId, targetType])
+  @@map("reviews")
+}
+
+model AuditLog {
+  id             BigInt   @id @default(autoincrement())
+  actorId        BigInt   @map("actor_id")
+  action         String
+  targetResource String   @map("target_resource")
+  targetId       String?  @map("target_id")
+  details        Json?
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("audit_logs")
+}
+
+model SystemSetting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("system_settings")
+}
+
+enum CorporateVoucherStatus {
+  UNASSIGNED
+  ASSIGNED
+  REDEEMED
+  EXPIRED
+  CANCELLED
+}
+
+enum BatchPaymentStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model CorporatePurchaseBatch {
+  id            BigInt             @id @default(autoincrement())
+  companyId     BigInt             @map("company_id")
+  voucherId     BigInt?            @map("voucher_id")
+  totalQuantity Int                @map("total_quantity")
+  totalPrice    Decimal            @default(0) @map("total_price") @db.Decimal(10, 2)
+  paymentStatus BatchPaymentStatus @default(PENDING) @map("payment_status")
+  employeeData  Json?              @map("employee_data")
+  createdBy     BigInt?            @map("created_by")
+  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  expiresAt     DateTime           @map("expires_at") @db.Timestamptz(6)
+
+  company    users              @relation(fields: [companyId], references: [id])
+  creator    users?             @relation("BatchCreator", fields: [createdBy], references: [id])
+  vouchers   CorporateVoucher[]
+  voucherRef Voucher?           @relation(fields: [voucherId], references: [id])
+  payments   Payment[]
+
+  @@map("corporate_purchase_batches")
+}
+
+model CorporateVoucher {
+  id          String                 @id @default(uuid())
+  batchId     BigInt                 @map("batch_id")
+  code        String                 @unique
+  redeemToken String                 @unique @map("redeem_token")
+  qrCodePath  String?                @map("qr_code_path")
+  status      CorporateVoucherStatus @default(UNASSIGNED)
+  companyId   BigInt                 @map("company_id")
+
+  assignedEmployeeName    String? @map("assigned_employee_name")
+  assignedEmployeeEmail   String? @map("assigned_employee_email")
+  assignedEmployeePhone   String? @map("assigned_employee_phone")
+  assignedEmployeeAddress String? @map("assigned_employee_address")
+
+  emailSent   Boolean   @default(false) @map("email_sent")
+  emailSentAt DateTime? @map("email_sent_at") @db.Timestamptz(6)
+
+  assignedAt DateTime? @map("assigned_at") @db.Timestamptz(6)
+  redeemedAt DateTime? @map("redeemed_at") @db.Timestamptz(6)
+  expiresAt  DateTime  @map("expires_at") @db.Timestamptz(6)
+
+  cancelledAt DateTime? @map("cancelled_at") @db.Timestamptz(6)
+  isArchived  Boolean   @default(false) @map("is_archived")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  assignedBy    BigInt? @map("assigned_by")
+  redeemedBy    BigInt? @map("redeemed_by")
+  redeemedEmail String? @map("redeemed_email")
+  cancelledBy   BigInt? @map("cancelled_by")
+
+  batch     CorporatePurchaseBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  company   users                  @relation(fields: [companyId], references: [id])
+  assigner  users?                 @relation("VoucherAssigner", fields: [assignedBy], references: [id])
+  redeemer  users?                 @relation("VoucherRedeemer", fields: [redeemedBy], references: [id])
+  canceller users?                 @relation("VoucherCanceller", fields: [cancelledBy], references: [id])
+
+  @@unique([batchId, assignedEmployeeEmail])
+  @@index([status])
+  @@index([companyId])
+  @@index([batchId])
+  @@index([assignedEmployeeEmail])
+  @@index([expiresAt])
+  @@map("corporate_vouchers")
+}

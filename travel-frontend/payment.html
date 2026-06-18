@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Thanh Toán - LumiForest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+
+    <style>
+      .border-flat {
+        border: 1px solid #e6e6e6;
+      }
+      .payment-sidebar-wrap {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 100px;
+        background: #fff;
+        border: 1px solid #e6e6e6;
+      }
+      .payment-methods-grid { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
+      }
+      @media(max-width: 576px) { 
+        .payment-methods-grid { 
+          grid-template-columns: 1fr; 
+        } 
+      }
+      .payment-method-card { 
+        border: 1px solid #e6e6e6; 
+        padding: 18px 20px; 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        transition: all 0.3s ease; 
+        position: relative; 
+        background: #fff; 
+      }
+      .payment-method-card:hover { 
+        border-color: #f96d00; 
+      }
+      .payment-method-card.active { 
+        border-color: #f96d00; 
+        background: #fafafa; 
+      }
+      .payment-method-card.active::after { 
+        content: "\f122"; 
+        font-family: "Ionicons"; 
+        position: absolute; 
+        top: 12px; 
+        right: 15px; 
+        color: #f96d00; 
+        font-size: 18px; 
+      }
+      .payment-icon { 
+        width: 40px; 
+        height: 40px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        background: #f8f9fa; 
+        margin-right: 15px; 
+        font-size: 22px; 
+        color: #666; 
+        transition: all 0.3s ease;
+      }
+      .payment-method-card.active .payment-icon { 
+        color: #fff; 
+        background: #f96d00; 
+      }
+      .payment-label { 
+        font-size: 15px; 
+        font-weight: 500; 
+        color: #000; 
+        margin: 0; 
+        line-height: 1.2; 
+      }
+
+      /* Premium Success Page Styling */
+      .success-icon-wrap {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 25px;
+      }
+      .success-icon-ring {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 120px;
+        height: 120px;
+        border: 2px solid rgba(40, 167, 69, 0.15);
+        border-radius: 50%;
+        animation: pulseRing 2s infinite;
+      }
+      .success-icon-circle {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 50px;
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+      }
+      @keyframes pulseRing {
+        0% { transform: scale(0.95); opacity: 1; }
+        100% { transform: scale(1.15); opacity: 0; }
+      }
+      @keyframes scaleIn {
+        0% { transform: scale(0); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .receipt-ticket {
+        max-width: 480px;
+        border: 1px solid #e6e6e6;
+        border-top: 4px solid #28a745;
+        background: #ffffff;
+        padding: 30px 40px;
+        text-align: left;
+        margin: 0 auto 30px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        border-radius: 4px;
+        overflow: visible;
+      }
+      .receipt-ticket-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #888;
+        text-transform: uppercase;
+        border-bottom: 1px dashed #e6e6e6;
+        padding-bottom: 18px;
+        margin-bottom: 22px;
+        text-align: center;
+      }
+      .receipt-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+      .receipt-row .label-text {
+        color: #777;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+      }
+      .receipt-row .label-text span.ion {
+        font-size: 17px;
+        width: 26px;
+        color: #f96d00;
+      }
+      .receipt-row .val-text {
+        color: #222;
+        font-weight: 600;
+      }
+      .receipt-divider {
+        position: relative;
+        border-top: 1px dashed #e6e6e6;
+        margin-top: 22px;
+        padding-top: 20px;
+      }
+      .receipt-divider::before,
+      .receipt-divider::after {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background: #f8f9fa; /* Matches the bg-light color */
+        border: 1px solid #e6e6e6;
+        border-radius: 50%;
+        top: -12px;
+        box-sizing: border-box;
+      }
+      .receipt-divider::before {
+        left: -52px; /* 40px padding + 12px overlap */
+      }
+      .receipt-divider::after {
+        right: -52px;
+      }
+
+      /* Hover effects for buttons */
+      .btn-hover-premium {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      }
+      .btn-hover-premium:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(249, 109, 0, 0.25) !important;
+      }
+      .btn-outline-hover-premium {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+        border-color: #f96d00 !important;
+        color: #f96d00 !important;
+      }
+      .btn-outline-hover-premium:hover {
+        transform: translateY(-2px);
+        background-color: #f96d00 !important;
+        color: #fff !important;
+        box-shadow: 0 6px 15px rgba(249, 109, 0, 0.25) !important;
+      }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="hero-wrap" style="background-image: url('assets/images/bg_1.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+            <div class="text">
+              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Thanh toán</span></p>
+              <h1 class="mb-4 bread" style="font-family: 'Playfair Display', serif;">Tiến hành thanh toán</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        
+        <!-- Bố cục thanh toán 2 cột -->
+        <div class="row" id="payment-form-view">
+          
+          <!-- Cột trái: Chọn phương thức và thông tin -->
+          <div class="col-lg-8 col-md-7 mb-4">
+            
+            <!-- Block 1: Phương thức thanh toán -->
+            <div class="bg-white p-4 p-md-5 mb-4 border-flat contact-form">
+              <h3 class="mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #000000;">
+                <span class="ion-ios-card mr-3" style="color: #f96d00;"></span>Chọn phương thức thanh toán
+              </h3>
+              
+              <div class="form-group mb-0">
+                <input type="hidden" id="pay-method" value="bank_transfer">
+                
+                <div class="payment-methods-grid">
+                  <div class="payment-method-card active" data-method="bank_transfer">
+                    <div class="payment-icon"><span class="ion-ios-business"></span></div>
+                    <p class="payment-label">Chuyển khoản</p>
+                  </div>
+                  <div class="payment-method-card" data-method="card">
+                    <div class="payment-icon"><span class="ion-ios-card"></span></div>
+                    <p class="payment-label">Thẻ tín dụng</p>
+                  </div>
+                  <div class="payment-method-card" data-method="momo">
+                    <div class="payment-icon"><span class="ion-ios-phone-portrait"></span></div>
+                    <p class="payment-label">Ví MoMo</p>
+                  </div>
+                  <div class="payment-method-card" data-method="vnpay">
+                    <div class="payment-icon"><span class="ion-ios-qr-scanner"></span></div>
+                    <p class="payment-label">VNPay</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Block 2: Thông tin liên hệ -->
+            <div class="bg-white p-4 p-md-5 mb-4 border-flat contact-form" id="contact-info-block">
+              <h3 class="mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #000000;">
+                <span class="ion-ios-contact mr-3" style="color: #f96d00;"></span>Thông tin liên hệ đặt chỗ
+              </h3>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label class="text-black font-weight-bold">Họ và tên</label>
+                  <input type="text" id="cust-name" class="form-control" readonly style="background: #f8f9fa !important; border: 1px solid #e6e6e6 !important; height: 45px !important;">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label class="text-black font-weight-bold">Email</label>
+                  <input type="email" id="cust-email" class="form-control" readonly style="background: #f8f9fa !important; border: 1px solid #e6e6e6 !important; height: 45px !important;">
+                </div>
+                <div class="col-md-12 form-group mb-0">
+                  <label class="text-black font-weight-bold">Vai trò</label>
+                  <input type="text" id="cust-role" class="form-control" readonly style="background: #f8f9fa !important; border: 1px solid #e6e6e6 !important; height: 45px !important;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Block 3: Điều khoản quy định -->
+            <div class="bg-white p-4 p-md-5 border-flat" style="font-size: 14px; line-height: 1.6; color: #666;">
+              <h3 class="mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #000000; font-size: 22px;">
+                <span class="ion-ios-paper mr-3" style="color: #f96d00;"></span>Điều khoản & Quy định
+              </h3>
+              <ul class="pl-3 mb-0" style="list-style-type: square; color: #666;">
+                <li class="mb-2"><strong>Quy định Check-in/Check-out:</strong> Thời gian nhận phòng tiêu chuẩn là sau 14:00 và trả phòng trước 12:00 trưa ngày hôm sau.</li>
+                <li class="mb-2"><strong>Xác nhận đặt chỗ:</strong> Mọi giao dịch sẽ được xử lý lập tức trong môi trường Demo. Hệ thống tự động gửi hóa đơn kèm mã QR Code xác minh đến email của bạn để thực hiện nhận phòng.</li>
+                <li class="mb-2"><strong>Chính sách hủy dịch vụ:</strong> Bạn có thể hủy đặt phòng hoặc đổi lịch trình miễn phí nếu báo trước thời điểm check-in tối thiểu 24 giờ.</li>
+                <li><strong>Bảo mật giao dịch:</strong> Toàn bộ dữ liệu truyền nhận trên cổng thanh toán của LumiForest đều được mã hóa theo tiêu chuẩn SSL 256-bit an toàn tuyệt đối.</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Cột phải: Sidebar hóa đơn & Nút thanh toán -->
+          <div class="col-lg-4 col-md-5">
+            <div class="payment-sidebar-wrap p-4 border-flat" id="payment-sidebar">
+              <h3 class="mb-3" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #000000; font-size: 20px; border-bottom: 2px solid #f96d00; padding-bottom: 10px;">
+                Tóm tắt đơn hàng
+              </h3>
+              
+              <div class="mb-3">
+                <h5 id="pay-title" class="font-weight-bold mb-1" style="font-family: 'Playfair Display', serif; color: #000; font-size: 1.15rem; line-height: 1.4;"></h5>
+                <p class="text-muted small mb-0" id="pay-subtitle" style="font-size: 13px;"></p>
+              </div>
+
+              <div id="pay-breakdown" class="text-muted mb-3 pt-3" style="display:none; border-top: 1px dashed #e6e6e6; font-size: 14px;"></div>
+              
+              <div class="d-flex justify-content-between align-items-center pt-3 mb-4" style="border-top: 1px solid #e6e6e6;">
+                <span class="text-dark font-weight-bold" style="font-size: 15px;">Tổng thanh toán:</span>
+                <strong style="font-size: 22px; color: #f96d00;" id="pay-amount"></strong>
+              </div>
+
+              <div class="form-group mb-0">
+                <button id="pay-btn" class="btn btn-primary py-3 btn-block" style="font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;"></button>
+              </div>
+              
+              <div class="text-center text-muted mt-3 small" style="font-size: 11px;">
+                <span class="ion-ios-lock mr-1" style="color: #f96d00;"></span> Môi trường Demo — Thanh toán bảo mật SSL
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Màn hình thông báo thành công (chuyển sang Modal) -->
+        <div class="modal fade" id="paymentSuccessModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-center border-0 p-4" style="border-radius:1.5rem; box-shadow:0 15px 35px rgba(0,0,0,0.2)">
+              <div class="modal-body py-4">
+                <div class="mb-4 d-inline-flex justify-content-center align-items-center" style="width:90px; height:90px; border-radius:50%; background:#d1e7dd; color:#0f5132;">
+                  <span style="font-size:48px;" class="ion-ios-checkmark"></span>
+                </div>
+                <h3 class="mb-2" id="pay-success-title" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #1e293b; font-size: 1.8rem;">Thanh toán thành công!</h3>
+                <p class="text-muted mb-4" id="pay-success-subtitle" style="font-style: italic; font-size: 15px;"></p>
+                
+                <!-- Ticket Hóa Đơn Cao Cấp -->
+                <div class="p-4 bg-light rounded text-left mb-4" style="border: 1px dashed #ced4da;">
+                  <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                    <span class="text-muted small"><span class="ion ion-ios-barcode mr-1"></span>Mã giao dịch</span>
+                    <code class="text-primary font-weight-bold" style="font-size:15px" id="pay-success-txid"></code>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted small"><span class="ion ion-ios-time mr-1"></span>Thời gian</span>
+                    <span id="pay-success-time" style="font-size:14px"></span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted small"><span class="ion ion-ios-wallet mr-1"></span>Phương thức</span>
+                    <span id="pay-success-method" style="font-size:14px"></span>
+                  </div>
+                  <div class="d-flex justify-content-between pt-2 mt-2" style="border-top: 1px solid #e6e6e6;">
+                    <span class="font-weight-bold" style="color: #000; font-size: 15px;">Tổng thanh toán</span>
+                    <strong class="text-success" style="font-size: 20px;" id="pay-success-amount"></strong>
+                  </div>
+                </div>
+                
+                <p class="text-muted mb-4" style="font-size: 14px;">Thông tin xác nhận chi tiết đã được gửi tới hòm thư của bạn.</p>
+                <div class="d-flex justify-content-center flex-column" style="gap:10px">
+                  <a href="profile.html#hotel-bookings" id="pay-success-history-btn" class="btn btn-outline-secondary py-2 px-4" style="font-weight:600; font-size: 14px; border-radius: 8px;">
+                    <span class="ion-ios-list-box mr-2"></span>Xem lịch sử
+                  </a>
+                  <button type="button" id="btn-close-success" class="btn btn-success py-3 px-4 font-weight-bold" style="border-radius:0.75rem; font-size:16px;">
+                    Đóng & Về trang chủ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/jquery.animateNumber.min.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
+    <script src="assets/js/jquery.timepicker.min.js"></script>
+    <script src="assets/js/scrollax.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/includes.js"></script>
+
+    <!-- Trang thanh toán riêng biệt -->
+    <script src="assets/js/payment-page.js?v=2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LumiForest - Retreat Ticket & Room Booking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="assets/css/aos.css">
+
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="assets/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <section id="index-banners-slider" class="owl-carousel home-slider">
+      <div class="slider-item" style="background-image:url(assets/images/bg_1.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-12 ftco-animate text-center">
+          	<div class="text mb-5 pb-3">
+	            <h1 class="mb-3" data-i18n="home.slide1.title">Welcome To LumiForest</h1>
+	            <h2 data-i18n="home.slide1.sub">Retreat &amp; Booking</h2>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="slider-item" style="background-image:url(assets/images/bg_2.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-12 ftco-animate text-center">
+          	<div class="text mb-5 pb-3">
+	            <h1 class="mb-3" data-i18n="home.slide2.title">Enjoy A Luxury Experience</h1>
+	            <h2 data-i18n="home.slide2.sub">Join With Us</h2>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-booking">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-12">
+    				<form action="#" id="index-booking-form" class="booking-form">
+	        		<div class="row">
+	        			<div class="col-md-3 d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+				    					<label for="#" data-i18n="home.book.checkin">Check-in Date</label>
+				    					<input type="text" id="booking-checkin" name="checkIn" class="form-control checkin_date" placeholder="Check-in date" autocomplete="off" readonly>
+			    					</div>
+			    				</div>
+	        			</div>
+	        			<div class="col-md-3 d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+				    					<label for="#" data-i18n="home.book.checkout">Check-out Date</label>
+				    					<input type="text" id="booking-checkout" name="checkOut" class="form-control checkout_date" placeholder="Check-out date" autocomplete="off" readonly>
+			    				</div>
+			    				</div>
+	        			</div>
+	        			<div class="col-md d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+			      					<label for="#" data-i18n="home.book.room">Room</label>
+			      					<div class="form-field">
+			        					<div class="select-wrap">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select name="type" id="booking-room-type" class="form-control">
+			                    	<option value="" data-i18n="filter.roomType">Room Type</option>
+			                    	<option value="Suite" data-i18n="room.suite">Suite</option>
+			                      <option value="Family" data-i18n="room.family">Family Room</option>
+			                      <option value="Deluxe" data-i18n="room.deluxe">Deluxe Room</option>
+			                      <option value="Classic" data-i18n="room.classic">Classic Room</option>
+			                      <option value="Superior" data-i18n="room.superior">Superior Room</option>
+			                      <option value="Luxury" data-i18n="room.luxury">Luxury Room</option>
+			                    </select>
+			                  </div>
+				              </div>
+				            </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+			      					<label for="#" data-i18n="home.book.customer">Customer</label>
+			      					<div class="form-field">
+			        					<div class="select-wrap">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select name="maxGuests" id="booking-guests" class="form-control">
+			                    	<option value="1">1 Adult</option>
+			                      <option value="2">2 Adult</option>
+			                      <option value="3">3 Adult</option>
+			                      <option value="4">4 Adult</option>
+			                      <option value="5">5 Adult</option>
+			                      <option value="6">6 Adult</option>
+			                    </select>
+			                  </div>
+				              </div>
+				            </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md d-flex">
+	        				<div class="form-group d-flex align-self-stretch">
+			              <input type="submit" value="Check Availability" data-i18n-value="home.book.submit" class="btn btn-primary py-3 px-4 align-self-stretch">
+			            </div>
+	        			</div>
+	        		</div>
+	        	</form>
+	    		</div>
+    		</div>
+    	</div>
+    </section>
+
+
+    <section class="ftco-section ftc-no-pb ftc-no-pt" style="background-image: none !important; background-color: #ffffff !important; position: relative; z-index: 10;">
+			<div class="container">
+				<div class="row">
+					<div id="index-about-image" class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('assets/images/about_placeholder.png');">
+					</div>
+					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
+	          	<div class="ml-md-0">
+		          	<span class="subheading" data-i18n="home.about.subheading">Welcome to LumiForest - Retreat & Booking</span>
+		            <h2 class="mb-4" data-i18n="home.about.title">Welcome to our service</h2>
+	            </div>
+	          </div>
+	          <div class="pb-md-5">
+							<p data-i18n="home.about.p1">On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn't take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+							<p data-i18n="home.about.p2">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+							<ul class="ftco-social d-flex">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ftco-section">
+      <div class="container">
+        <div id="dynamic-services-container" class="row d-flex">
+          <!-- Dynamic services will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+    	<div class="container">
+				<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 class="mb-4" data-i18n="home.rooms.title">Our Rooms</h2>
+          </div>
+        </div>    		
+    		<div class="row" id="index-rooms-list">
+    			<!-- Dynamic Rooms will be loaded here -->
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(assets/images/bg_1.jpg);">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-10">
+		    		<div class="row">
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="50000">0</strong>
+		                <span data-i18n="counter.guests">Happy Guests</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="3000">0</strong>
+		                <span data-i18n="counter.rooms">Rooms</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="1000">0</strong>
+		                <span data-i18n="counter.staffs">Staffs</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="100">0</strong>
+		                <span data-i18n="counter.destination">Destination</span>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+
+    <section class="ftco-section testimony-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 ftco-animate">
+          	<div class="row ftco-animate">
+		          <div class="col-md-12">
+		            <div class="carousel-testimony owl-carousel ftco-owl">
+		              <div class="item">
+		                <div class="testimony-wrap py-4 pb-5">
+		                  <div class="user-img mb-4" style="background-image: url(assets/images/person_1.jpg)">
+		                    <span class="quote d-flex align-items-center justify-content-center">
+		                      <i class="icon-quote-left"></i>
+		                    </span>
+		                  </div>
+		                  <div class="text text-center">
+		                    <p class="mb-4" data-i18n="testimony.text">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+		                    <p class="name">Nathan Smith</p>
+		                    <span class="position" data-i18n="testimony.role">Guests</span>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="item">
+		                <div class="testimony-wrap py-4 pb-5">
+		                  <div class="user-img mb-4" style="background-image: url(assets/images/person_2.jpg)">
+		                    <span class="quote d-flex align-items-center justify-content-center">
+		                      <i class="icon-quote-left"></i>
+		                    </span>
+		                  </div>
+		                  <div class="text text-center">
+		                    <p class="mb-4" data-i18n="testimony.text">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+		                    <p class="name">Nathan Smith</p>
+		                    <span class="position" data-i18n="testimony.role">Guests</span>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="item">
+		                <div class="testimony-wrap py-4 pb-5">
+		                  <div class="user-img mb-4" style="background-image: url(assets/images/person_3.jpg)">
+		                    <span class="quote d-flex align-items-center justify-content-center">
+		                      <i class="icon-quote-left"></i>
+		                    </span>
+		                  </div>
+		                  <div class="text text-center">
+		                    <p class="mb-4" data-i18n="testimony.text">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+		                    <p class="name">Nathan Smith</p>
+		                    <span class="position" data-i18n="testimony.role">Guests</span>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="item">
+		                <div class="testimony-wrap py-4 pb-5">
+		                  <div class="user-img mb-4" style="background-image: url(assets/images/person_1.jpg)">
+		                    <span class="quote d-flex align-items-center justify-content-center">
+		                      <i class="icon-quote-left"></i>
+		                    </span>
+		                  </div>
+		                  <div class="text text-center">
+		                    <p class="mb-4" data-i18n="testimony.text">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+		                    <p class="name">Nathan Smith</p>
+		                    <span class="position" data-i18n="testimony.role">Guests</span>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="item">
+		                <div class="testimony-wrap py-4 pb-5">
+		                  <div class="user-img mb-4" style="background-image: url(assets/images/person_1.jpg)">
+		                    <span class="quote d-flex align-items-center justify-content-center">
+		                      <i class="icon-quote-left"></i>
+		                    </span>
+		                  </div>
+		                  <div class="text text-center">
+		                    <p class="mb-4" data-i18n="testimony.text">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+		                    <p class="name">Nathan Smith</p>
+		                    <span class="position" data-i18n="testimony.role">Guests</span>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 data-i18n="home.blog.title">Recent Blog</h2>
+          </div>
+        </div>
+        <div class="row d-flex" id="index-blog-list">
+        	<!-- Dynamic Blogs will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="instagram">
+      <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Instagram</span></h2>
+          </div>
+        </div>
+        <div class="row no-gutters" id="index-instagram-list">
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-1.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-2.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-3.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-4.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-5.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.easing.1.3.js"></script>
+  <script src="assets/js/jquery.waypoints.min.js"></script>
+  <script src="assets/js/jquery.stellar.min.js"></script>
+  <script src="assets/js/owl.carousel.min.js"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="assets/js/aos.js"></script>
+  <script src="assets/js/jquery.animateNumber.min.js"></script>
+  <script src="assets/js/bootstrap-datepicker.js"></script>
+  <script src="assets/js/jquery.timepicker.min.js"></script>
+  <script src="assets/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="assets/js/google-map.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/index.js"></script>
+    
+    <script src="assets/js/auth.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/header.js"></script>
+  <script src="assets/js/includes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>

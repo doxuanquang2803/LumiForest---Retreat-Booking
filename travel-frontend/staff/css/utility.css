@@ -1,0 +1,81 @@
+/* ── Utilities ── */
+.cursor-pointer   { cursor: pointer !important; }
+.text-primary-custom { color: var(--primary) !important; }
+.bg-primary-custom   { background-color: var(--primary) !important; color: #fff; }
+.hover-shadow        { transition: box-shadow .3s ease; }
+.hover-shadow:hover  { box-shadow: var(--shadow) !important; }
+.font-heading        { font-family: var(--font-family-heading) !important; }
+.font-body           { font-family: var(--font-family) !important; }
+.min-h-100vh         { min-height: 100vh; }
+.rounded-custom      { border-radius: var(--radius-sm) !important; }
+.rounded-custom-lg   { border-radius: var(--radius) !important; }
+.flex-1              { flex: 1; }
+
+/* ── Buttons ── */
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: .85rem;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  box-shadow: 0 4px 12px rgba(14,165,233,.3);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-dark));
+  box-shadow: 0 6px 18px rgba(14,165,233,.4);
+}
+.btn-primary:focus { box-shadow: 0 0 0 3px rgba(14,165,233,.3); }
+
+/* ── Card ── */
+.card {
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.card-header {
+  background: var(--card-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 1.1rem 1.25rem !important;
+}
+.card-header h4, .card-header h5 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ── Form ── */
+.form-control, .form-select {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  padding: .55rem .85rem;
+  font-size: .875rem;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14,165,233,.15);
+}
+.form-label {
+  font-weight: 500;
+  font-size: .82rem;
+  color: var(--text-dark);
+  margin-bottom: .35rem;
+}
+
+/* ── Modal ── */
+.modal-content {
+  border: none !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+.modal-header, .modal-footer { border-color: var(--border-color) !important; }
+.modal-title { font-size: 1.1rem !important; font-weight: 600 !important; }
+
+/* ── Toast ── */
+.toast-container { z-index: 9999; }
+
+/* ── Misc ── */
+.text-muted { color: var(--text-muted) !important; }
+a { color: var(--primary); }
+a:hover { color: var(--primary-dark); }

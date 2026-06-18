@@ -1,0 +1,462 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "Travel Backend API",
+  "collectionId": "a1b2c3d4-0001-0001-0001-000000000001",
+  "dateExported": "2026-05-27",
+  "version": "1.2",
+  "folders": [
+    { "id": "f-health",       "name": "Health",            "containerId": "" },
+    { "id": "f-auth",         "name": "Auth",              "containerId": "" },
+    { "id": "f-users",        "name": "Users",             "containerId": "" },
+    { "id": "f-hotels",       "name": "Hotels",            "containerId": "" },
+    { "id": "f-hotel-images", "name": "Hotel Images",      "containerId": "" },
+    { "id": "f-rooms",        "name": "Rooms",             "containerId": "" },
+    { "id": "f-room-images",  "name": "Room Images",       "containerId": "" },
+    { "id": "f-bookings",     "name": "Bookings",          "containerId": "" },
+    { "id": "f-contact",      "name": "Contact",           "containerId": "" },
+    { "id": "f-blog",         "name": "Blog",              "containerId": "" },
+    { "id": "f-apart",        "name": "Apartments",        "containerId": "" },
+    { "id": "f-img",          "name": "Apartment Images",  "containerId": "" },
+    { "id": "f-tours",        "name": "Tours",             "containerId": "" },
+    { "id": "f-vouchers",     "name": "Vouchers",          "containerId": "" }
+  ],
+  "requests": [
+
+    {
+      "_id": "r-01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-health", "name": "Health Check",
+      "url": "http://localhost:3000/api/health", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Register",
+      "url": "http://localhost:3000/api/auth/register", "method": "POST",
+      "sortNum": 1, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"name\": \"Nguyen Van A\",\n  \"email\": \"test@example.com\",\n  \"password\": \"123456\"\n}" }
+    },
+    {
+      "_id": "r-03", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Login",
+      "url": "http://localhost:3000/api/auth/login", "method": "POST",
+      "sortNum": 2, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"123456\"\n}" }
+    },
+    {
+      "_id": "r-03b", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Get Profile",
+      "url": "http://localhost:3000/api/auth/profile", "method": "GET",
+      "sortNum": 3, "headers": [{ "name": "Authorization", "value": "Bearer YOUR_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-03c", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Refresh Token",
+      "url": "http://localhost:3000/api/auth/refresh-token", "method": "POST",
+      "sortNum": 4, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"refreshToken\": \"YOUR_REFRESH_TOKEN\"\n}" }
+    },
+    {
+      "_id": "r-03d", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Change Password",
+      "url": "http://localhost:3000/api/auth/change-password", "method": "PUT",
+      "sortNum": 5, "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer YOUR_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"currentPassword\": \"123456\",\n  \"newPassword\": \"654321\"\n}" }
+    },
+    {
+      "_id": "r-03e", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-auth", "name": "Logout",
+      "url": "http://localhost:3000/api/auth/logout", "method": "POST",
+      "sortNum": 6, "headers": [{ "name": "Authorization", "value": "Bearer YOUR_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-u01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Get My Profile",
+      "url": "http://localhost:3000/api/users/profile", "method": "GET",
+      "sortNum": 1, "headers": [{ "name": "Authorization", "value": "Bearer YOUR_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-u02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Update My Profile",
+      "url": "http://localhost:3000/api/users/profile", "method": "PUT",
+      "sortNum": 2, "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer YOUR_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"name\": \"Nguyen Van B\"\n}" }
+    },
+    {
+      "_id": "r-u03", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Get All Users (Admin)",
+      "url": "http://localhost:3000/api/users", "method": "GET",
+      "sortNum": 3, "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-u04", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Get User By ID (Admin)",
+      "url": "http://localhost:3000/api/users/1", "method": "GET",
+      "sortNum": 4, "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-u05", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Update User Status (Admin)",
+      "url": "http://localhost:3000/api/users/1/status", "method": "PUT",
+      "sortNum": 5, "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"status\": \"inactive\"\n}" }
+    },
+    {
+      "_id": "r-u06", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-users", "name": "Delete User (Admin)",
+      "url": "http://localhost:3000/api/users/1", "method": "DELETE",
+      "sortNum": 6, "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-h01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Get All Hotels",
+      "url": "http://localhost:3000/api/hotels", "method": "GET",
+      "sortNum": 1, "headers": [],
+      "params": [
+        { "name": "page",  "value": "1",  "isPath": false },
+        { "name": "limit", "value": "10", "isPath": false }
+      ],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Search Hotels",
+      "url": "http://localhost:3000/api/hotels/search", "method": "GET",
+      "sortNum": 2, "headers": [],
+      "params": [{ "name": "q", "value": "Phú Quốc", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h03", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Filter Hotels",
+      "url": "http://localhost:3000/api/hotels/filter", "method": "GET",
+      "sortNum": 3, "headers": [],
+      "params": [
+        { "name": "starRating", "value": "5",        "isPath": false },
+        { "name": "minPrice",   "value": "1000000",  "isPath": false },
+        { "name": "maxPrice",   "value": "5000000",  "isPath": false },
+        { "name": "location",   "value": "Hà Nội",   "isPath": false }
+      ],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h04", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Get Featured Hotels",
+      "url": "http://localhost:3000/api/hotels/featured", "method": "GET",
+      "sortNum": 4, "headers": [],
+      "params": [{ "name": "limit", "value": "8", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h05", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Get Popular Hotels",
+      "url": "http://localhost:3000/api/hotels/popular", "method": "GET",
+      "sortNum": 5, "headers": [],
+      "params": [{ "name": "limit", "value": "10", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h06", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Get Hotel By ID",
+      "url": "http://localhost:3000/api/hotels/1", "method": "GET",
+      "sortNum": 6, "headers": [],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h07", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Get Hotel Recommendations",
+      "url": "http://localhost:3000/api/hotels/1/recommendations", "method": "GET",
+      "sortNum": 7, "headers": [],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-h08", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Create Hotel (Admin)",
+      "url": "http://localhost:3000/api/hotels", "method": "POST",
+      "sortNum": 8,
+      "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Khách sạn Mới\",\n  \"slug\": \"khach-san-moi\",\n  \"description\": \"Mô tả khách sạn mới ít nhất 10 ký tự.\",\n  \"location\": \"Hồ Chí Minh\",\n  \"address\": \"123 Nguyễn Huệ, Q.1, TP.HCM\",\n  \"starRating\": 4,\n  \"price\": 1500000,\n  \"thumbnail\": \"https://images.unsplash.com/photo-1566073771259?w=800\",\n  \"amenities\": [\"WiFi\", \"Hồ bơi\", \"Gym\"],\n  \"featured\": false,\n  \"status\": \"active\"\n}"
+      }
+    },
+    {
+      "_id": "r-h09", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Update Hotel (Admin)",
+      "url": "http://localhost:3000/api/hotels/1", "method": "PUT",
+      "sortNum": 9,
+      "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"price\": 4000000,\n  \"featured\": true\n}" }
+    },
+    {
+      "_id": "r-h10", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotels", "name": "Delete Hotel (Admin)",
+      "url": "http://localhost:3000/api/hotels/1", "method": "DELETE",
+      "sortNum": 10,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-hi01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotel-images", "name": "Upload Hotel Image (Admin)",
+      "url": "http://localhost:3000/api/hotel-images", "method": "POST",
+      "sortNum": 1,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": {
+        "type": "formdata", "raw": "",
+        "form": [
+          { "name": "hotelId", "value": "1",   "type": "text" },
+          { "name": "type",    "value": "gallery", "type": "text" },
+          { "name": "image",   "value": "",    "type": "file" }
+        ]
+      }
+    },
+    {
+      "_id": "r-hi02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotel-images", "name": "Set Thumbnail (Admin)",
+      "url": "http://localhost:3000/api/hotel-images/1/thumbnail", "method": "PUT",
+      "sortNum": 2,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-hi03", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-hotel-images", "name": "Delete Hotel Image (Admin)",
+      "url": "http://localhost:3000/api/hotel-images/1", "method": "DELETE",
+      "sortNum": 3,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-05", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Get All Rooms",
+      "url": "http://localhost:3000/api/rooms", "method": "GET",
+      "sortNum": 1, "headers": [],
+      "params": [
+        { "name": "page",  "value": "1",  "isPath": false },
+        { "name": "limit", "value": "10", "isPath": false }
+      ],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-rm01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Get Rooms By Hotel",
+      "url": "http://localhost:3000/api/rooms/hotel/1", "method": "GET",
+      "sortNum": 2, "headers": [],
+      "params": [{ "name": "status", "value": "available", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-06", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Get Room By ID",
+      "url": "http://localhost:3000/api/rooms/1", "method": "GET",
+      "sortNum": 3, "headers": [],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-rm02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Get Room Availability",
+      "url": "http://localhost:3000/api/rooms/1/availability", "method": "GET",
+      "sortNum": 4, "headers": [],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-rm03", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Create Room (Admin)",
+      "url": "http://localhost:3000/api/rooms", "method": "POST",
+      "sortNum": 5,
+      "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"hotelId\": 1,\n  \"name\": \"Phòng Standard\",\n  \"type\": \"Standard\",\n  \"description\": \"Phòng tiêu chuẩn đầy đủ tiện nghi cơ bản.\",\n  \"price\": 800000,\n  \"maxGuests\": 2,\n  \"beds\": 1,\n  \"bathrooms\": 1,\n  \"thumbnail\": \"https://images.unsplash.com/photo-1631049307264?w=800\",\n  \"amenities\": [\"WiFi\", \"Điều hòa\", \"TV\"],\n  \"status\": \"available\"\n}"
+      }
+    },
+    {
+      "_id": "r-rm04", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Update Room (Admin)",
+      "url": "http://localhost:3000/api/rooms/1", "method": "PUT",
+      "sortNum": 6,
+      "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"price\": 1000000,\n  \"status\": \"available\"\n}" }
+    },
+    {
+      "_id": "r-rm05", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Update Room Status (Admin)",
+      "url": "http://localhost:3000/api/rooms/1/status", "method": "PUT",
+      "sortNum": 7,
+      "headers": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"status\": \"occupied\"\n}" }
+    },
+    {
+      "_id": "r-rm06", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-rooms", "name": "Delete Room (Admin)",
+      "url": "http://localhost:3000/api/rooms/1", "method": "DELETE",
+      "sortNum": 8,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-ri01", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-room-images", "name": "Upload Room Image (Admin)",
+      "url": "http://localhost:3000/api/room-images", "method": "POST",
+      "sortNum": 1,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [],
+      "body": {
+        "type": "formdata", "raw": "",
+        "form": [
+          { "name": "roomId", "value": "1",      "type": "text" },
+          { "name": "type",   "value": "gallery", "type": "text" },
+          { "name": "image",  "value": "",        "type": "file" }
+        ]
+      }
+    },
+    {
+      "_id": "r-ri02", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-room-images", "name": "Delete Room Image (Admin)",
+      "url": "http://localhost:3000/api/room-images/1", "method": "DELETE",
+      "sortNum": 2,
+      "headers": [{ "name": "Authorization", "value": "Bearer ADMIN_TOKEN_HERE" }],
+      "params": [], "body": { "type": "none", "raw": "" }
+    },
+
+    {
+      "_id": "r-07", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-bookings", "name": "Get All Bookings",
+      "url": "http://localhost:3000/api/bookings", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-08", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-bookings", "name": "Create Booking",
+      "url": "http://localhost:3000/api/bookings", "method": "POST",
+      "sortNum": 2, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"roomId\": 1,\n  \"checkIn\": \"2026-06-01\",\n  \"checkOut\": \"2026-06-05\",\n  \"guests\": 2\n}" }
+    },
+    {
+      "_id": "r-12", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-contact", "name": "Get All Contacts",
+      "url": "http://localhost:3000/api/contact", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-13", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-contact", "name": "Send Contact",
+      "url": "http://localhost:3000/api/contact", "method": "POST",
+      "sortNum": 2, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"name\": \"Nguyen Van A\",\n  \"email\": \"test@example.com\",\n  \"message\": \"Tôi muốn hỏi về dịch vụ\"\n}" }
+    },
+    {
+      "_id": "r-14", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-blog", "name": "Get All Blogs",
+      "url": "http://localhost:3000/api/blog", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-15", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Get All Apartments",
+      "url": "http://localhost:3000/api/apartments", "method": "GET",
+      "sortNum": 1, "headers": [],
+      "params": [{ "name": "page", "value": "1", "isPath": false }, { "name": "limit", "value": "10", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-16", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Search Apartments",
+      "url": "http://localhost:3000/api/apartments/search", "method": "GET",
+      "sortNum": 2, "headers": [],
+      "params": [{ "name": "q", "value": "Hà Nội", "isPath": false }],
+      "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-18", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Get Apartment By ID",
+      "url": "http://localhost:3000/api/apartments/1", "method": "GET",
+      "sortNum": 3, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-19", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Create Apartment",
+      "url": "http://localhost:3000/api/apartments", "method": "POST",
+      "sortNum": 4, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"title\": \"Căn hộ cao cấp Hà Nội\",\n  \"description\": \"Căn hộ view hồ, đầy đủ tiện nghi, gần trung tâm thành phố.\",\n  \"location\": \"Hà Nội\",\n  \"address\": \"123 Đường Láng, Đống Đa, Hà Nội\",\n  \"price\": 1500000,\n  \"maxGuests\": 4,\n  \"bedrooms\": 2,\n  \"bathrooms\": 1,\n  \"thumbnail\": \"https://example.com/image.jpg\",\n  \"status\": \"available\"\n}" }
+    },
+    {
+      "_id": "r-20", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Update Apartment",
+      "url": "http://localhost:3000/api/apartments/1", "method": "PUT",
+      "sortNum": 5, "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n  \"price\": 1800000,\n  \"status\": \"rented\"\n}" }
+    },
+    {
+      "_id": "r-21", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-apart", "name": "Delete Apartment",
+      "url": "http://localhost:3000/api/apartments/1", "method": "DELETE",
+      "sortNum": 6, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-22", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-img", "name": "Upload Apartment Image",
+      "url": "http://localhost:3000/api/apartment-images", "method": "POST",
+      "sortNum": 1, "headers": [], "params": [],
+      "body": { "type": "formdata", "raw": "", "form": [{ "name": "apartmentId", "value": "1", "type": "text" }, { "name": "image", "value": "", "type": "file" }] }
+    },
+    {
+      "_id": "r-24", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-img", "name": "Delete Apartment Image",
+      "url": "http://localhost:3000/api/apartment-images/1", "method": "DELETE",
+      "sortNum": 2, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-25", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-tours", "name": "Get All Tours",
+      "url": "http://localhost:3000/api/tours", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-26", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-tours", "name": "Get Tour By ID",
+      "url": "http://localhost:3000/api/tours/1", "method": "GET",
+      "sortNum": 2, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-27", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-vouchers", "name": "Get All Vouchers",
+      "url": "http://localhost:3000/api/vouchers", "method": "GET",
+      "sortNum": 1, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    },
+    {
+      "_id": "r-28", "colId": "a1b2c3d4-0001-0001-0001-000000000001",
+      "containerId": "f-vouchers", "name": "Get Voucher By ID",
+      "url": "http://localhost:3000/api/vouchers/1", "method": "GET",
+      "sortNum": 2, "headers": [], "params": [], "body": { "type": "none", "raw": "" }
+    }
+  ]
+}

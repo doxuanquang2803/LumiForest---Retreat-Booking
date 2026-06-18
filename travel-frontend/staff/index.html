@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · LumiForest Staff</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/utility.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+</head>
+<body>
+
+  <div id="wrapper">
+    <div id="sidebar-wrapper"></div>
+
+    <div id="page-content-wrapper">
+      <div id="header-wrapper"></div>
+
+      <div id="main-content" class="container-fluid">
+
+        <!-- Page heading -->
+        <div class="page-heading">
+          <h3 data-i18n="staff.dash.welcome">Welcome back 👋</h3>
+          <p data-i18n="staff.dash.subtitle">Overview of today's activity.</p>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div>
+                <h3 id="stat-bookings">0</h3>
+                <p data-i18n="staff.dash.newBookings">New Bookings</p>
+              </div>
+              <div class="icon-wrapper bg-primary-light">
+                <i class="bi bi-calendar-check"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div>
+                <h3 id="stat-revenue">—</h3>
+                <p data-i18n="staff.dash.revenue">Revenue</p>
+              </div>
+              <div class="icon-wrapper bg-success-light">
+                <i class="bi bi-cash-stack"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div>
+                <h3 id="stat-reviews">0</h3>
+                <p data-i18n="staff.dash.totalReviews">Total Reviews</p>
+              </div>
+              <div class="icon-wrapper bg-warning-light">
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div>
+                <h3 id="stat-contacts">0</h3>
+                <p data-i18n="staff.dash.inquiries">Inquiries</p>
+              </div>
+              <div class="icon-wrapper bg-danger-light">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Bookings table -->
+        <div class="card border-0">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0" data-i18n="staff.dash.recentBookings">Recent Bookings</h5>
+            <a href="bookings.html" class="btn btn-sm btn-outline-primary" data-i18n="staff.dash.viewAll">View all</a>
+          </div>
+          <div class="card-body p-0">
+            <div id="recent-bookings-table"></div>
+          </div>
+        </div>
+
+      </div><!-- /main-content -->
+    </div><!-- /page-content-wrapper -->
+  </div><!-- /wrapper -->
+
+  <div id="modals-wrapper"></div>
+  <div id="sidebar-overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module">
+    import { LayoutRenderer } from './components/LayoutRenderer.js';
+    import { LifecycleManager } from './services/LifecycleManager.js';
+
+    (async () => {
+      await LayoutRenderer.init();
+      LifecycleManager.loadModule(import('./js/modules/dashboard.js'));
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script type="module">import { CustomAlert } from "./services/CustomAlert.js"; window.CustomAlert = CustomAlert;</script>
+</body>
+</html>

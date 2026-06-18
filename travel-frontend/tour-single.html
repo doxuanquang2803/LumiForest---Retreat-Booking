@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tour Detail - LumiForest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="hero-wrap" style="background-image: url('assets/images/bg_1.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+            <div class="text">
+              <p class="breadcrumbs mb-2">
+                <span class="mr-2"><a href="index.html" data-i18n="bread.home">Home</a></span>
+                <span class="mr-2"><a href="tours.html" data-i18n="nav.tours">Tours</a></span>
+                <span id="breadcrumb-name">Tour Detail</span>
+              </p>
+              <h1 class="mb-4 bread" id="hero-tour-name">Tour Detail</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-8">
+            <div id="tour-detail-content">
+              <div class="text-center py-5"><p data-i18n="common.loading">Loading...</p></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-wrap bg-light p-4 mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="heading mb-0" data-i18n="tsh.bookTour">Đặt tour</h3>
+                <button id="btn-wishlist" class="btn btn-outline-secondary btn-sm">
+                  <span class="ion-ios-heart-empty"></span> <span data-i18n="hsh.save">Lưu</span>
+                </button>
+              </div>
+              <p class="mb-3" id="sidebar-tour-price" style="color:#F96D00;font-size:20px;font-weight:700"></p>
+              <form id="tour-booking-form">
+                <input type="hidden" id="booking-tour-id">
+                <div class="form-group">
+                  <input type="text" name="fullName" class="form-control" data-i18n-placeholder="hsh.fullNamePh" placeholder="Họ và tên *" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" data-i18n-placeholder="hsh.emailPh" placeholder="Email *" required>
+                </div>
+                <div class="form-group">
+                  <input type="tel" name="phone" class="form-control" data-i18n-placeholder="hsh.phonePh" placeholder="Số điện thoại *" required>
+                </div>
+                <div class="form-group">
+                  <label style="font-size:12px;color:#999;margin-bottom:4px" data-i18n="tsh.departLabel">Ngày khởi hành</label>
+                  <input type="text" name="bookingDate" id="booking-date" class="form-control checkin_date" placeholder="dd/mm/yyyy" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                  <input type="number" name="guests" id="booking-guests" class="form-control" data-i18n-placeholder="tsh.guestsPh" placeholder="Số khách" min="1" value="1">
+                </div>
+                <div id="booking-price-preview" class="alert alert-light py-2 mb-3" style="display:none;font-size:13px"></div>
+                <button type="submit" id="btn-book-submit" class="btn btn-primary py-3 w-100" data-i18n="ts.bookNow">Đặt tour ngay</button>
+              </form>
+            </div>
+
+            <div class="sidebar-wrap bg-light p-4 ftco-animate">
+              <h3 class="heading mb-3" data-i18n="tsh.tourInfo">Thông tin tour</h3>
+              <ul class="list">
+                <li><span data-i18n="hsh.location">Địa điểm:</span> <span id="info-location">-</span></li>
+                <li><span data-i18n="tsh.duration">Thời gian:</span> <span id="info-duration">-</span></li>
+                <li><span data-i18n="tsh.max">Tối đa:</span> <span id="info-guests">-</span></li>
+                <li><span data-i18n="hs.rating">Đánh giá:</span> <span id="info-rating">-</span></li>
+                <li><span data-i18n="tsh.price">Giá:</span> <span id="info-price">-</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row mt-5" id="reviews-section"></div>
+
+        <div class="row mt-5" id="related-section">
+          <div class="col-12">
+            <h4 class="mb-4" data-i18n="tsh.similar">Tour tương tự</h4>
+            <div class="row" id="related-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instagram pt-5">
+      <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Instagram</span></h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-1.jpg);">
+              <div class="icon d-flex justify-content-center"><span class="icon-instagram align-self-center"></span></div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-2.jpg);">
+              <div class="icon d-flex justify-content-center"><span class="icon-instagram align-self-center"></span></div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-3.jpg);">
+              <div class="icon d-flex justify-content-center"><span class="icon-instagram align-self-center"></span></div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-4.jpg);">
+              <div class="icon d-flex justify-content-center"><span class="icon-instagram align-self-center"></span></div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(assets/images/insta-5.jpg);">
+              <div class="icon d-flex justify-content-center"><span class="icon-instagram align-self-center"></span></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/jquery.animateNumber.min.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
+    <script src="assets/js/jquery.timepicker.min.js"></script>
+    <script src="assets/js/scrollax.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    
+    <script src="assets/js/wishlist.js"></script>
+    <script src="assets/js/tour-single.js"></script>
+    <script src="assets/js/reviews-widget.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var id = new URLSearchParams(window.location.search).get('id');
+        if (id) ReviewsWidget.init({ mountId: 'reviews-section', targetType: 'TOUR', targetId: id });
+      });
+    </script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/header.js"></script>
+    <script src="assets/js/includes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>

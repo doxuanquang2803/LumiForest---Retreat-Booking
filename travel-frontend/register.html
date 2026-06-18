@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Register - LumiForest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+
+    <style>
+      body {
+        background-image: url('assets/images/bg_2.jpg'); /* Sunset Palm Trees background for Register */
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+      }
+      .overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 0;
+      }
+      #header-placeholder {
+        z-index: 2;
+        position: relative;
+      }
+      .register-wrapper {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        padding: 100px 15px 60px 15px; /* Top space for dynamic navbar */
+      }
+      .register-card {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 3rem 2.5rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 460px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .register-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+      .register-card h3 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        color: #1e1e1e;
+        margin-bottom: 0.5rem;
+      }
+      .register-card .brand-text {
+        color: #2ba5c9;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 5px;
+        text-align: left;
+        display: block;
+      }
+      .form-control {
+        height: 48px !important;
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6 !important;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .form-control:focus {
+        border-color: #2ba5c9 !important;
+        box-shadow: none !important;
+      }
+      .btn-primary {
+        background: #2ba5c9 !important;
+        border: 1px solid #2ba5c9 !important;
+        color: #fff !important;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        height: 48px;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background: transparent !important;
+        color: #2ba5c9 !important;
+        border-color: #2ba5c9 !important;
+      }
+      .text-center a {
+        color: #2ba5c9;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      .text-center a:hover {
+        color: #1e7e9a;
+        text-decoration: none;
+      }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <!-- Dark Background Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Header Placeholder (Transparent LumiForest Header) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Centered Register Section -->
+    <div class="register-wrapper">
+      <div class="register-card text-center">
+        <h3 class="mb-2"><span data-i18n="auth.createOn">Create Account on</span> <span class="brand-text">LumiForest</span></h3>
+        <p class="text-muted mb-4" data-i18n="auth.joinSub2">Join us today to access luxury packages</p>
+        
+        <div id="auth-msg" style="display:none" class="mb-3"></div>
+        
+        <form id="register-form" class="text-left">
+          <div id="step-1">
+            <div class="form-group mb-3">
+              <label data-i18n="auth.fullName">Full Name</label>
+              <input type="text" name="name" class="form-control" data-i18n-placeholder="auth.fullNamePh" placeholder="Enter your full name" required autocomplete="name">
+            </div>
+            <div class="form-group mb-3">
+              <label data-i18n="auth.email">Email Address</label>
+              <input type="email" name="email" class="form-control" data-i18n-placeholder="auth.emailPh" placeholder="Enter your email" required autocomplete="email">
+            </div>
+            <div class="form-group mb-3">
+              <label data-i18n="auth.password">Password</label>
+              <input type="password" name="password" class="form-control" data-i18n-placeholder="auth.pwMin" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+            </div>
+            <div class="form-group mb-4">
+              <label data-i18n="auth.confirmPassword">Confirm Password</label>
+              <input type="password" name="confirm_password" class="form-control" data-i18n-placeholder="auth.confirmPasswordPh" placeholder="Re-enter your password" required autocomplete="new-password">
+            </div>
+            <div class="form-group mb-0">
+              <button type="button" id="btn-request-otp" class="btn btn-primary btn-block" data-i18n="auth.continueBtn">Tiếp tục</button>
+            </div>
+          </div>
+
+          <div id="step-2" style="display: none;">
+            <p class="text-muted mb-4" data-i18n="auth.otpSent">Chúng tôi đã gửi mã OTP gồm 6 chữ số đến email của bạn. Vui lòng nhập mã để hoàn tất đăng ký.</p>
+            <div class="form-group mb-4">
+              <label data-i18n="auth.otpCode">Mã OTP</label>
+              <input type="text" name="otp" class="form-control" data-i18n-placeholder="auth.otpPlaceholder" placeholder="Nhập mã OTP 6 số" autocomplete="off">
+            </div>
+            <div class="form-group mb-0">
+              <button type="submit" id="btn-submit-register" class="btn btn-primary btn-block" data-i18n="auth.createAccount">Create Account</button>
+            </div>
+            <div class="text-center mt-3">
+              <a href="#" id="btn-back-step-1" class="text-muted"><small data-i18n="auth.backBtn">Quay lại</small></a>
+            </div>
+          </div>
+        </form>
+        
+        <p class="text-center mt-4 mb-0 text-muted">
+          <span data-i18n="auth.haveAccount">Already have an account?</span> <a href="login.html" data-i18n="auth.loginLink">Login</a>
+        </p>
+
+        <!-- Google Sign-In Section -->
+        <div class="mt-4 mb-2" style="display: flex; align-items: center; justify-content: center;">
+          <hr style="flex: 1; border-color: #ddd;">
+          <span style="padding: 0 10px; color: #888; font-size: 14px;" data-i18n="auth.orContinueWith">Hoặc tiếp tục với</span>
+          <hr style="flex: 1; border-color: #ddd;">
+        </div>
+        <div id="google-btnContainer" style="display: flex; justify-content: center;"></div>
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/scrollax.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/header.js"></script>
+    <script src="assets/js/includes.js"></script>
+    
+    <script>
+      function handleGoogleCredentialResponse(response) {
+        var msg = document.getElementById('auth-msg');
+        api.post('/auth/google', { credential: response.credential })
+          .then(function (res) {
+            if (res.success) {
+              Auth.save(res.accessToken, res.user);
+              Auth.saveTokens(res.accessToken, res.refreshToken);
+              window.location.href = 'index.html';
+            } else {
+              msg.className = 'alert alert-danger';
+              msg.textContent = res.message || t('auth.googleRegFail') || 'Đăng ký Google thất bại';
+              msg.style.display = 'block';
+            }
+          }).catch(function (error) {
+            console.error('Google login error:', error);
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('common.connFail') || 'Lỗi kết nối máy chủ';
+            msg.style.display = 'block';
+          });
+      }
+
+      function onGoogleLibraryLoad() {
+        const lang = window.I18N ? window.I18N.getLang() : 'en';
+        google.accounts.id.initialize({
+          client_id: 'YOUR_GOOGLE_CLIENT_ID',
+          callback: handleGoogleCredentialResponse,
+          context: 'signup'
+        });
+        google.accounts.id.renderButton(
+          document.getElementById('google-btnContainer'),
+          { theme: 'outline', size: 'large', text: 'signup_with', locale: lang }
+        );
+      }
+
+      // Lắng nghe sự kiện đổi ngôn ngữ để load lại script Google
+      document.addEventListener('i18n:changed', function (e) {
+        document.getElementById('google-btnContainer').innerHTML = '';
+        const existingScript = document.getElementById('google-jssdk');
+        if (existingScript) existingScript.remove();
+        
+        const script = document.createElement('script');
+        script.id = 'google-jssdk';
+        script.src = 'https://accounts.google.com/gsi/client?hl=' + e.detail.lang + '&onload=onGoogleLibraryLoad';
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      });
+    </script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Load Google SDK dynamically with correct language
+        const lang = window.I18N ? window.I18N.getLang() : 'en';
+        const script = document.createElement('script');
+        script.id = 'google-jssdk';
+        script.src = 'https://accounts.google.com/gsi/client?hl=' + lang + '&onload=onGoogleLibraryLoad';
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+
+        // Redirect if already logged in
+        if (Auth.isLoggedIn()) window.location.href = 'index.html';
+
+        var step1 = document.getElementById('step-1');
+        var step2 = document.getElementById('step-2');
+        var btnRequestOtp = document.getElementById('btn-request-otp');
+        var btnBackStep1 = document.getElementById('btn-back-step-1');
+        var form = document.getElementById('register-form');
+
+        btnRequestOtp.addEventListener('click', function() {
+          var msg = document.getElementById('auth-msg');
+          var name = form.querySelector('[name=name]').value;
+          var email = form.querySelector('[name=email]').value;
+          var password = form.querySelector('[name=password]').value;
+          var confirm = form.querySelector('[name=confirm_password]').value;
+
+          if (!name || !email || !password) {
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('auth.fillAll') || 'Vui lòng điền đầy đủ thông tin.';
+            msg.style.display = 'block';
+            return;
+          }
+
+          if (password !== confirm) {
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('auth.pwMismatch') || 'Mật khẩu không khớp';
+            msg.style.display = 'block';
+            return;
+          }
+
+          btnRequestOtp.disabled = true;
+          btnRequestOtp.textContent = t('auth.processing') || 'Đang xử lý...';
+          
+          api.post('/auth/register/request-otp', {
+            name: name,
+            email: email,
+            password: password
+          }).then(function (res) {
+            if (res.success) {
+              msg.className = 'alert alert-success';
+              msg.textContent = res.message;
+              msg.style.display = 'block';
+              
+              step1.style.display = 'none';
+              step2.style.display = 'block';
+            } else {
+              msg.className = 'alert alert-danger';
+              msg.textContent = res.message;
+              msg.style.display = 'block';
+            }
+          }).catch(function () {
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('common.connFail') || 'Lỗi kết nối';
+            msg.style.display = 'block';
+          }).finally(function() {
+            btnRequestOtp.disabled = false;
+            btnRequestOtp.textContent = t('auth.continueBtn') || 'Tiếp tục';
+          });
+        });
+
+        btnBackStep1.addEventListener('click', function(e) {
+          e.preventDefault();
+          step2.style.display = 'none';
+          step1.style.display = 'block';
+          document.getElementById('auth-msg').style.display = 'none';
+        });
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var btn = this.querySelector('button[type=submit]');
+          var msg = document.getElementById('auth-msg');
+          var name = this.querySelector('[name=name]').value;
+          var email = this.querySelector('[name=email]').value;
+          var password = this.querySelector('[name=password]').value;
+          var otp = this.querySelector('[name=otp]').value;
+
+          if (!otp) {
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('auth.enterOtp') || 'Vui lòng nhập mã OTP.';
+            msg.style.display = 'block';
+            return;
+          }
+
+          btn.disabled = true;
+          btn.textContent = t('auth.creating') || 'Đang tạo tài khoản...';
+
+          api.post('/auth/register', {
+            name: name,
+            email: email,
+            password: password,
+            otp: otp
+          }).then(function (res) {
+            if (res.success) {
+              Auth.save(res.accessToken, res.user);
+              Auth.saveTokens(res.accessToken, res.refreshToken);
+              window.location.href = 'index.html';
+            } else {
+              msg.className = 'alert alert-danger';
+              msg.textContent = res.message;
+              msg.style.display = 'block';
+              btn.disabled = false;
+              btn.textContent = t('auth.createAccount') || 'Tạo tài khoản';
+            }
+          }).catch(function () {
+            msg.className = 'alert alert-danger';
+            msg.textContent = t('common.connFail') || 'Lỗi kết nối';
+            msg.style.display = 'block';
+            btn.disabled = false;
+            btn.textContent = t('auth.createAccount') || 'Tạo tài khoản';
+          });
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>

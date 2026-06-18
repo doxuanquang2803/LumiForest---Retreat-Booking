@@ -1,0 +1,37 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/vinhvinh450/travel-backend.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[branch "DEV"]
+	vscode-merge-base = origin/main
+	remote = origin
+	merge = refs/heads/DEV
+[branch "Develop"]
+	remote = origin
+	merge = refs/heads/Develop
+	vscode-merge-base = origin/Develop
+[branch "feature/tour"]
+	vscode-merge-base = origin/Develop
+	remote = origin
+	merge = refs/heads/feature/tour
+[branch "feature--tour-bookings"]
+	vscode-merge-base = origin/Develop
+	remote = origin
+	merge = refs/heads/feature--tour-bookings
+[branch "feature/tour-bookings"]
+	vscode-merge-base = origin/Develop
+[pull]
+	rebase = false
+[branch "Features"]
+	vscode-merge-base = origin/Develop
+	remote = origin
+	merge = refs/heads/Features

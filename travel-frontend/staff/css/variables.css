@@ -1,0 +1,54 @@
+:root {
+  /* Brand */
+  --primary:        #0ea5e9;
+  --primary-dark:   #0284c7;
+  --primary-light:  #e0f2fe;
+  --accent:         #6366f1;
+
+  /* Status */
+  --success:        #22c55e;
+  --warning:        #f59e0b;
+  --danger:         #ef4444;
+  --info:           #06b6d4;
+
+  /* Sidebar */
+  --sidebar-bg:     #0f172a;
+  --sidebar-bg-2:   #1e293b;
+  --sidebar-text:   #94a3b8;
+  --sidebar-active-bg: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  --sidebar-width:  16rem;
+
+  /* Surface */
+  --body-bg:        #f1f5f9;
+  --card-bg:        #ffffff;
+  --text-dark:      #1e293b;
+  --text-muted:     #64748b;
+  --border-color:   #e2e8f0;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.08);
+  --shadow:     0 4px 12px rgba(15,23,42,.08);
+  --shadow-lg:  0 12px 32px rgba(15,23,42,.12);
+
+  /* Radius */
+  --radius:     16px;
+  --radius-sm:  10px;
+
+  /* Typography */
+  --font-family:         'Poppins', -apple-system, 'Segoe UI', sans-serif;
+  --font-family-heading: 'Poppins', sans-serif;
+
+  /* Legacy aliases (keeps existing components working) */
+  --primary-color:    var(--primary);
+  --primary-hover:    var(--primary-dark);
+  --danger-color:     var(--danger);
+  --success-color:    var(--success);
+  --warning-color:    var(--warning);
+  --info-color:       var(--info);
+  --bg-light:         var(--body-bg);
+  --bg-white:         var(--card-bg);
+  --sidebar-hover:    rgba(255,255,255,.06);
+  --sidebar-active:   var(--primary);
+  --border-radius:    var(--radius-sm);
+  --border-radius-lg: var(--radius);
+}

@@ -1,0 +1,62 @@
+/* ── Stat cards ── */
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.stat-card h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: .2rem;
+  font-family: var(--font-family);
+  line-height: 1.1;
+}
+.stat-card p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: .82rem;
+}
+
+.stat-card .icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+/* Icon color variants */
+.icon-wrapper.bg-primary-light  { background: #e0f2fe; color: #0284c7; }
+.icon-wrapper.bg-success-light  { background: #dcfce7; color: #16a34a; }
+.icon-wrapper.bg-warning-light  { background: #fef3c7; color: #d97706; }
+.icon-wrapper.bg-danger-light   { background: #fee2e2; color: #dc2626; }
+.icon-wrapper.bg-indigo-light   { background: #e0e7ff; color: #4f46e5; }
+.icon-wrapper.bg-cyan-light     { background: #cffafe; color: #0e7490; }
+
+/* ── Quick-action buttons on dashboard ── */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+.quick-actions .btn {
+  font-size: .82rem;
+  padding: .5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}

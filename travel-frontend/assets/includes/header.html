@@ -1,0 +1,136 @@
+<style>
+  /* ── Navbar Brand: Icon + Text ── */
+  .navbar-brand {
+    display: inline-flex !important;
+    align-items: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .navbar-brand-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+    transition: all 0.35s ease;
+  }
+
+  .navbar-brand-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    line-height: 1;
+    transition: all 0.35s ease;
+  }
+
+  .navbar-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-transform: uppercase;
+    transition: color 0.35s ease;
+  }
+
+  .navbar-brand-tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(141, 112, 59, 0.9);
+    margin-top: 3px;
+    transition: color 0.35s ease;
+  }
+
+  .navbar-brand:hover .navbar-brand-logo {
+    filter: drop-shadow(0 2px 8px rgba(141, 112, 59, 0.4));
+    transform: scale(1.04);
+  }
+
+  .navbar-brand:hover .navbar-brand-name {
+    color: #c9a84c;
+  }
+
+  /* ── Scrolled ── */
+  .ftco-navbar-light.scrolled .navbar-brand-logo {
+    height: 36px;
+  }
+
+  .ftco-navbar-light.scrolled .navbar-brand-name {
+    font-size: 16px;
+    color: #1a1a1a;
+  }
+
+  .ftco-navbar-light.scrolled .navbar-brand-tagline {
+    font-size: 8px;
+    color: #8d703b;
+  }
+
+  .ftco-navbar-light.scrolled .navbar-brand:hover .navbar-brand-name {
+    color: #8d703b;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 991.98px) {
+    .navbar-brand-logo {
+      height: 40px;
+    }
+    .navbar-brand-name {
+      font-size: 16px;
+    }
+    .navbar-brand-tagline {
+      font-size: 8px;
+      letter-spacing: 2px;
+    }
+    .navbar-brand-text {
+      margin-left: 10px;
+    }
+    .ftco-navbar-light.scrolled .navbar-brand-logo {
+      height: 32px;
+    }
+  }
+</style>
+<nav class="navbar navbar-expand-xl navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/images/lumiforest-icon.png" alt="LumiForest" class="navbar-brand-logo">
+      <div class="navbar-brand-text">
+        <span class="navbar-brand-name">LumiForest</span>
+        <span class="navbar-brand-tagline">Retreat &amp; Booking</span>
+      </div>
+    </a>
+    <!-- Original full logo kept as comment:
+    <img src="assets/images/Circular Packaging Pilot Program (3).png" alt="LumiForest Logo">
+    -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" data-page="index.html"><a href="index.html" class="nav-link"><span data-i18n="nav.home">Home</span></a></li>
+        <li class="nav-item" data-page="hotels.html"><a href="hotels.html" class="nav-link"><span data-i18n="nav.hotels">Hotels</span></a></li>
+        <li class="nav-item" data-page="apartments.html"><a href="apartments.html" class="nav-link"><span data-i18n="nav.apartments">Apartments</span></a></li>
+        <li class="nav-item" data-page="tours.html"><a href="tours.html" class="nav-link"><span data-i18n="nav.tours">Tours</span></a></li>
+        <li class="nav-item" data-page="vouchers.html"><a href="vouchers.html" class="nav-link"><span data-i18n="nav.vouchers">Vouchers</span></a></li>
+        <li class="nav-item" data-page="blog.html"><a href="blog.html" class="nav-link"><span data-i18n="nav.blog">Blog</span></a></li>
+        <li class="nav-item" data-page="contact.html"><a href="contact.html" class="nav-link"><span data-i18n="nav.contact">Contact</span></a></li>
+        <li class="nav-item" data-page="wishlist.html"><a href="wishlist.html" class="nav-link"><span class="ion-ios-heart-empty"></span></a></li>
+        <li class="nav-item" data-page="notifications.html" id="nav-notif">
+          <a href="notifications.html" class="nav-link" style="position:relative">
+            <span class="ion-ios-notifications-outline"></span>
+            <span id="notif-bell-count" style="display:none;position:absolute;top:4px;right:-2px;background:#dc3545;color:#fff;border-radius:50%;font-size:10px;width:16px;height:16px;line-height:16px;text-align:center"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link lang-switch" id="lang-toggle" title="Language">
+            <span class="fi fi-gb" id="lang-flag"></span> <span id="lang-label">EN</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

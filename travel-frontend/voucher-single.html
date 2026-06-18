@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Voucher Detail - LumiForest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="hero-wrap" style="background-image: url('assets/images/bg_1.jpg');" id="voucher-hero">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+            <div class="text">
+              <p class="breadcrumbs mb-2">
+                <span class="mr-2"><a href="index.html" data-i18n="bread.home">Home</a></span>
+                <span class="mr-2"><a href="vouchers.html" data-i18n="nav.vouchers">Vouchers</a></span>
+                <span id="breadcrumb-name">Voucher Detail</span>
+              </p>
+              <h1 class="mb-4 bread" id="hero-voucher-name">Voucher Detail</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section" id="voucher-detail-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div id="voucher-detail-content">
+              <div class="text-center py-5"><p data-i18n="common.loading">Loading...</p></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-wrap bg-light p-4 mb-4 text-center">
+              <div class="d-flex justify-content-center align-items-center mb-3">
+                <h3 class="heading mb-0 text-primary" data-i18n="vsh.buyThis">Buy This Voucher</h3>
+              </div>
+              <div class="mb-4 text-left">
+                 <p class="mb-1"><span class="text-muted" data-i18n="v.exp">Valid until:</span> <strong id="sidebar-valid-date">...</strong></p>
+                 <p class="mb-1"><span class="text-muted" data-i18n="v.remainingPre">Left:</span> <strong id="sidebar-remaining">...</strong></p>
+                 <p class="mb-1 d-none" id="sidebar-price-container">
+                   <del class="text-muted mr-2" id="sidebar-original-price"></del>
+                   <strong class="text-primary" style="font-size: 20px" id="sidebar-sale-price"></strong>
+                 </p>
+              </div>
+              <button id="btn-buy-voucher" class="btn btn-primary py-3 px-5 w-100" data-i18n="v.buyNow">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal 1: Form đặt mua voucher -->
+    <div class="modal fade" id="voucherOrderModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><span data-i18n="vh.orderTitle">Mua Voucher:</span> <span id="modal-voucher-name"></span></h5>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="bg-light p-3 rounded mb-3">
+              <p class="mb-1"><strong id="order-voucher-title"></strong></p>
+              <p class="mb-1 text-muted small"><span class="ion-ios-business"></span> <span id="order-resort-name"></span></p>
+              <p class="mb-0"><span data-i18n="vh.price">Giá:</span> <strong class="text-primary" id="order-unit-price"></strong> / voucher</p>
+            </div>
+            <form id="voucher-order-form">
+              <input type="hidden" id="modal-voucher-id">
+              <input type="hidden" id="modal-unit-price-val">
+              <div class="mb-3 bg-light p-2 rounded" style="border: 1px solid #dee2e6;">
+                <label class="font-weight-bold text-primary mb-0 w-100" for="is-corporate" style="cursor: pointer; display: flex; align-items: center;">
+                  <input type="checkbox" id="is-corporate" style="margin: 0 12px 0 0; width: 18px; height: 18px; flex-shrink: 0; position: static;">
+                  <span>
+                    <span class="ion-ios-briefcase mr-1"></span> <span data-i18n="vh.corporate">Mua cho doanh nghiệp / Cấp phát nhân viên</span>
+                  </span>
+                </label>
+              </div>
+              <div id="personal-fields">
+                <div class="form-group">
+                  <label><span data-i18n="vh.fullName">Họ và tên</span> <span class="text-danger">*</span></label>
+                  <input type="text" id="order-fullName" class="form-control" data-i18n-placeholder="vh.fullNamePh" placeholder="Nhập họ tên" required minlength="2">
+                </div>
+                <div class="form-group">
+                  <label><span data-i18n="vh.emailLabel">Email nhận voucher</span> <span class="text-danger">*</span></label>
+                  <input type="email" id="order-email" class="form-control" data-i18n-placeholder="vh.emailPh" placeholder="Nhập email" required>
+                </div>
+                <div class="form-group">
+                  <label><span data-i18n="vh.phone">Số điện thoại</span> <span class="text-danger">*</span></label>
+                  <input type="tel" id="order-phone" class="form-control" data-i18n-placeholder="vh.phonePh" placeholder="Nhập số điện thoại (10 số)" required minlength="10">
+                </div>
+              </div>
+              <div id="corporate-fields" style="display: none;">
+                <div class="form-group">
+                  <label>Tệp Excel danh sách nhân viên <span class="text-danger">*</span></label>
+                  <input type="file" id="corporate-excel" class="form-control p-1" accept=".xlsx">
+                  <small class="form-text text-muted">File Excel bắt buộc có các cột: Full Name, Email, Phone Number, Address.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-i18n="vh.quantity">Số lượng</label>
+                <input type="number" id="order-quantity" class="form-control" value="1" min="1" max="10">
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-3 p-2 bg-warning-light rounded" style="background:#fff8e1;border-radius:6px;padding:10px">
+                <span data-i18n="vh.totalAmount">Tổng tiền:</span>
+                <strong class="text-primary" style="font-size:18px" id="order-total-display">0 ₫</strong>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block py-3" data-i18n="v.continueBuy">Tiếp tục đặt mua</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2: Thanh toán -->
+    <div class="modal fade" id="voucherPayModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" data-i18n="vh.payConfirm">Xác nhận thanh toán</h5>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="pay-order-id">
+            <div class="bg-light p-3 rounded mb-3">
+              <h6 class="mb-2" data-i18n="vh.orderDetails">Chi tiết đơn hàng</h6>
+              <table class="table table-sm table-borderless mb-0">
+                <tr><td class="text-muted">Voucher:</td><td><strong id="pay-voucher-name"></strong></td></tr>
+                <tr><td class="text-muted">Resort:</td><td id="pay-resort-name"></td></tr>
+                <tr><td class="text-muted" data-i18n="v.qty">Số lượng:</td><td id="pay-quantity"></td></tr>
+                <tr><td class="text-muted" data-i18n="vh.totalAmount">Tổng tiền:</td><td><strong class="text-primary" id="pay-total"></strong></td></tr>
+              </table>
+            </div>
+            <div class="form-group">
+              <label data-i18n="vh.payMethod">Phương thức thanh toán</label>
+              <select id="pay-method" class="form-control">
+                <option value="bank_transfer" data-i18n="vh.pmBank">Chuyển khoản ngân hàng</option>
+                <option value="card" data-i18n="vh.pmCard">Thẻ tín dụng / Ghi nợ</option>
+                <option value="momo" data-i18n="vh.pmMomo">Ví MoMo</option>
+                <option value="vnpay">VNPay</option>
+              </select>
+            </div>
+            <div class="alert alert-info small mb-3">
+              <span class="ion-ios-information-circle"></span>
+              <span data-i18n="vh.demoNote">Đây là môi trường demo. Nhấn "Thanh toán ngay" để xác nhận và nhận mã voucher.</span>
+            </div>
+            <button id="btn-confirm-pay" class="btn btn-success btn-block py-3">
+              <span class="ion-ios-card"></span> <span data-i18n="v.payNow">Thanh toán ngay</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3: Thành công -->
+    <div class="modal fade" id="voucherSuccessModal" tabindex="-1" role="dialog" data-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center border-0 p-4" style="border-radius:1.5rem; box-shadow:0 15px 35px rgba(0,0,0,0.2)">
+          <div class="modal-body py-5">
+            <div class="mb-4 d-inline-flex justify-content-center align-items-center" style="width:90px; height:90px; border-radius:50%; background:#d1e7dd; color:#0f5132;">
+              <span style="font-size:48px;" class="ion-ios-checkmark"></span>
+            </div>
+            <h4 class="font-weight-bold mb-2" style="color:#222" data-i18n="vh.successTitle">Thanh toán thành công!</h4>
+            <p class="text-muted mb-4">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
+            <div class="p-4 bg-light rounded text-left mb-4" style="border: 1px dashed #ced4da;">
+              <h6 class="font-weight-bold mb-3 pb-2 border-bottom" id="success-voucher-name"></h6>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted small" data-i18n="vh.yourCode">Mã voucher:</span>
+                <code class="text-primary font-weight-bold" id="success-voucher-code" style="font-size: 16px;"></code>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary btn-block mt-2" id="btn-copy-code" title="Sao chép">
+                <span class="ion-ios-copy"></span> Sao chép mã
+              </button>
+            </div>
+            <div class="mb-4">
+              <img id="success-qr" src="" alt="QR Code" style="width:120px;height:120px;border:1px solid #eee;border-radius:8px; display:inline-block;">
+              <p class="small text-muted mt-2" data-i18n="vh.scanQr">Quét mã QR khi check-in</p>
+            </div>
+            <p class="small text-muted mb-4"><span class="ion-ios-mail mr-1"></span><span data-i18n="vh.sentEmail">Biên lai đã được gửi đến email của bạn.</span></p>
+            <button type="button" class="btn btn-success btn-block py-3 font-weight-bold" data-dismiss="modal" style="border-radius:0.75rem; font-size:16px;">Hoàn tất</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/jquery.animateNumber.min.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
+    <script src="assets/js/jquery.timepicker.min.js"></script>
+    <script src="assets/js/scrollax.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    
+    <script src="assets/js/voucher-single.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/includes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>

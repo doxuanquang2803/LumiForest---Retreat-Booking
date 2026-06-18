@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings · LumiForest Admin</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="../../assets/css/flaticon.css">
+  <link rel="stylesheet" href="../../assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .banner-slide-card, .instagram-card {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f8f9fa;
+      position: relative;
+    }
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .preview-img {
+      max-width: 150px;
+      max-height: 100px;
+      object-fit: cover;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: 1px dashed #ced4da;
+      display: block;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+</head>
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <div class="sidebar-heading text-center fw-bold">
+        <span class="text-primary">LumiForest</span> Admin
+      </div>
+      <div class="sidebar-section" data-i18n="section.management">Management</div>
+      <div class="list-group list-group-flush">
+        <a href="../index.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-grid-1x2-fill me-2"></i><span data-i18n="nav.dashboard">Dashboard</span>
+        </a>
+        <a href="users.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-people-fill me-2"></i><span data-i18n="nav.users">Users</span>
+        </a>
+        <a href="reports.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-bar-chart-line-fill me-2"></i><span data-i18n="nav.reports">Reports</span>
+        </a>
+        <a href="audit.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-journal-text me-2"></i><span data-i18n="nav.audit">Audit Logs</span>
+        </a>
+        <a href="trash.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-trash3-fill me-2"></i><span data-i18n="nav.trash">Trash</span>
+        </a>
+        <a href="settings.html" class="list-group-item list-group-item-action active">
+          <i class="bi bi-gear-fill me-2"></i><span data-i18n="nav.settings">System Settings</span>
+        </a>
+      </div>
+      <div class="sidebar-section" data-i18n="section.other">Other</div>
+      <div class="list-group list-group-flush">
+        <a href="../../index.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-box-arrow-up-right me-2"></i><span data-i18n="nav.website">View Website</span>
+        </a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-list me-3" id="menu-toggle"></i>
+          <h2 class="m-0" data-i18n="settings.title">System Settings</h2>
+        </div>
+        <div class="ms-auto d-flex align-items-center gap-2">
+          <button class="lang-switch" id="lang-toggle" type="button" title="Language">
+            <span class="fi fi-gb" id="lang-flag"></span> <span id="lang-label">EN</span>
+          </button>
+          <div class="dropdown">
+            <a class="dropdown-toggle text-decoration-none" href="#" id="navbarDropdown"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar"><i class="bi bi-person-fill"></i></span>
+              <span id="user-name" class="fw-semibold">Admin</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-danger" href="#" id="logout-btn"><i class="bi bi-box-arrow-right me-2"></i><span data-i18n="menu.logout">Logout</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <div class="page-heading">
+          <h3 data-i18n="settings.title">System Settings</h3>
+          <p data-i18n="settings.subtitle">Update website footer information, banners, and Instagram links.</p>
+        </div>
+
+        <div id="settings-alert" class="alert d-none"></div>
+
+        <div class="bg-white p-4 shadow-sm rounded">
+          <!-- Navigation Tabs -->
+          <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="footer-tab" data-bs-toggle="tab" data-bs-target="#footer-pane" type="button" role="tab" data-i18n="settings.tab.footer">Footer Settings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="banners-tab" data-bs-toggle="tab" data-bs-target="#banners-pane" type="button" role="tab" data-i18n="settings.tab.banners">Banners Settings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="cat-banners-tab" data-bs-toggle="tab" data-bs-target="#cat-banners-pane" type="button" role="tab" data-i18n="settings.tab.catBanners">Category Banners</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="instagram-tab" data-bs-toggle="tab" data-bs-target="#instagram-pane" type="button" role="tab" data-i18n="settings.tab.instagram">Instagram Settings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="about-image-tab" data-bs-toggle="tab" data-bs-target="#about-image-pane" type="button" role="tab" data-i18n="settings.tab.aboutImage">About Section Image</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-pane" type="button" role="tab" data-i18n="settings.tab.services">Services Settings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-pane" type="button" role="tab">Contact Page</button>
+            </li>
+          </ul>
+
+
+          <form id="settings-form">
+            <div class="tab-content" id="settingsTabContent">
+              <!-- Footer Pane -->
+              <div class="tab-pane fade show active" id="footer-pane" role="tabpanel" aria-labelledby="footer-tab">
+                <div class="mb-3">
+                  <label class="form-label" data-i18n="settings.footer.desc">Introductory text about company</label>
+                  <textarea class="form-control" id="footer-desc" rows="4" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" data-i18n="settings.footer.address">Contact Address</label>
+                  <input type="text" class="form-control" id="footer-address" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" data-i18n="settings.footer.phone">Contact Phone</label>
+                  <input type="text" class="form-control" id="footer-phone" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" data-i18n="settings.footer.email">Contact Email</label>
+                  <input type="email" class="form-control" id="footer-email" required>
+                </div>
+              </div>
+
+              <!-- Banners Pane -->
+              <div class="tab-pane fade" id="banners-pane" role="tabpanel" aria-labelledby="banners-tab">
+                <div id="banners-container">
+                  <!-- Dynamic Banner slides -->
+                </div>
+                <button type="button" class="btn btn-outline-primary mt-2" id="add-banner-btn">
+                  <i class="bi bi-plus-circle me-1"></i> <span data-i18n="settings.banner.add">Add Slide Banner</span>
+                </button>
+              </div>
+
+              <!-- Category Banners Pane -->
+              <div class="tab-pane fade" id="cat-banners-pane" role="tabpanel" aria-labelledby="cat-banners-tab">
+                <div id="cat-banners-container">
+                  <!-- Dynamic Category Banners -->
+                </div>
+              </div>
+
+              <!-- Instagram Pane -->
+              <div class="tab-pane fade" id="instagram-pane" role="tabpanel" aria-labelledby="instagram-tab">
+                <div id="instagram-container">
+                  <!-- Dynamic Instagram items -->
+                </div>
+                <button type="button" class="btn btn-outline-primary mt-2" id="add-instagram-btn">
+                  <i class="bi bi-plus-circle me-1"></i> <span data-i18n="settings.instagram.add">Add Instagram Image</span>
+                </button>
+              </div>
+
+              <!-- About Image Pane -->
+              <div class="tab-pane fade" id="about-image-pane" role="tabpanel" aria-labelledby="about-image-tab">
+                <div class="banner-slide-card">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-md-4">
+                      <h5 class="fw-semibold mb-0 text-primary" data-i18n="settings.aboutImage.title">About Section Image</h5>
+                      <span class="text-muted small">Homepage Welcome Image</span>
+                    </div>
+                    <div class="col-md-5">
+                      <label class="form-label mb-1">Upload New Image</label>
+                      <input type="file" class="form-control" id="about-file-input" accept="image/*">
+                      <input type="hidden" id="about-img-url" value="">
+                      <button type="button" class="btn btn-sm btn-outline-warning mt-2" id="btn-reset-about-image"><i class="bi bi-arrow-counterclockwise"></i> Reset to Default</button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <span class="d-block text-muted small mb-1">Current Active Image</span>
+                      <img class="preview-img mx-auto" id="about-image-preview" src="../../assets/images/about_placeholder.png" alt="Preview">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Services Pane -->
+              <div class="tab-pane fade" id="services-pane" role="tabpanel" aria-labelledby="services-tab">
+                <div id="services-container">
+                  <!-- Dynamic Service items -->
+                </div>
+                <button type="button" class="btn btn-outline-primary mt-2" id="add-service-btn">
+                  <i class="bi bi-plus-circle me-1"></i> <span data-i18n="settings.services.add">Add Service</span>
+                </button>
+              </div>
+
+              <!-- Contact Pane -->
+              <div class="tab-pane fade" id="contact-pane" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="banner-slide-card">
+                  <h5 class="fw-semibold mb-3 text-primary">Contact Page Information</h5>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Contact Address</label>
+                      <input type="text" class="form-control" id="contact-address" placeholder="Enter company address">
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control" id="contact-phone" placeholder="Enter phone number">
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label">Email Address</label>
+                      <input type="email" class="form-control" id="contact-email" placeholder="Enter email address">
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label">Website</label>
+                      <input type="url" class="form-control" id="contact-website" placeholder="https://yoursite.com">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <label class="form-label">Location Map (Click to select)</label>
+                      <div class="input-group mb-2">
+                        <input type="text" id="map-search-input" class="form-control" placeholder="Search for a city, region, or address...">
+                        <button class="btn btn-outline-secondary" type="button" id="map-search-btn"><i class="bi bi-search"></i> Search</button>
+                      </div>
+                      <div id="contact-map" style="height: 400px; border-radius: 8px; border: 1px solid #dee2e6;"></div>
+                      <small class="text-muted">Click anywhere on the map to place a pin and save the coordinates.</small>
+                    </div>
+                  </div>
+                  <div class="row mb-3 d-none">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="contact-lat">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="contact-lng">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <div class="d-flex align-items-center gap-3">
+              <button type="submit" class="btn btn-primary px-4 py-2" id="save-settings-btn">
+                <i class="bi bi-check-circle me-1"></i> <span data-i18n="settings.save">Save Settings</span>
+              </button>
+              <button type="button" class="btn btn-outline-danger px-4 py-2" id="reset-settings-btn">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> <span>Reset to Defaults</span>
+              </button>
+              <div id="saving-spinner" class="spinner-border text-primary d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Custom JS -->
+  <script src="../js/api.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/settings.js"></script>
+  <script>
+    var el = document.getElementById("wrapper");
+    var toggleButton = document.getElementById("menu-toggle");
+    toggleButton.onclick = function () {
+      el.classList.toggle("toggled");
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="js/CustomAlert.js"></script>
+</body>
+</html>

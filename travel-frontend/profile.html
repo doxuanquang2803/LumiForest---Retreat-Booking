@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tài khoản - LumiForest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <style>
+      .profile-tab-nav .nav-link { color: #555; border-radius: 0; border-bottom: 3px solid transparent; padding: 10px 18px; font-weight: 500; }
+      .profile-tab-nav .nav-link.active { color: #F96D00; border-bottom-color: #F96D00; background: none; }
+      .profile-tab-nav .nav-link:hover { color: #F96D00; }
+      .history-card { border: none; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.07); margin-bottom: 16px; }
+      .history-card .card-body { padding: 20px 24px; }
+      .status-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing:.5px; }
+      .badge-pending    { background:#fff3cd; color:#856404; }
+      .badge-confirmed  { background:#d1e7dd; color:#0a3622; }
+      .badge-cancelled  { background:#f8d7da; color:#842029; }
+      .badge-checked_in { background:#cff4fc; color:#055160; }
+      .badge-checked_out{ background:#e2e3e5; color:#41464b; }
+      .badge-paid       { background:#d1e7dd; color:#0a3622; }
+      .badge-unpaid     { background:#fff3cd; color:#856404; }
+      .badge-completed  { background:#d1e7dd; color:#0a3622; }
+      .badge-refunded   { background:#e2e3e5; color:#41464b; }
+      .badge-failed     { background:#f8d7da; color:#842029; }
+      .badge-PAID       { background:#d1e7dd; color:#0a3622; }
+      .badge-PENDING_PAYMENT { background:#fff3cd; color:#856404; }
+      .badge-USED       { background:#e2e3e5; color:#41464b; }
+      .badge-EXPIRED    { background:#f8d7da; color:#842029; }
+      .history-meta { font-size: 13px; color: #777; }
+      .history-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+      .tab-section { display: none; }
+      .tab-section.active { display: block; }
+      .empty-state { text-align:center; padding: 48px 16px; color: #999; }
+      .empty-state .ion { font-size: 48px; display:block; margin-bottom: 12px; }
+
+      /* Booking Detail Modal Stylings */
+      .booking-details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      @media(max-width: 576px) {
+        .booking-details-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .detail-card-section {
+        background: #fdfdfd;
+        border: 1px solid #f0f0f0;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      .detail-section-title {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #999;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 6px;
+      }
+      .detail-field {
+        margin-bottom: 10px;
+      }
+      .detail-field-label {
+        font-size: 12px;
+        color: #888;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .detail-field-value {
+        font-size: 14px;
+        color: #111;
+        font-weight: 600;
+      }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="hero-wrap" style="background-image: url('assets/images/bg_1.jpg'); min-height:200px">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+            <div class="text">
+              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html" data-i18n="bread.home">Home</a></span> <span data-i18n="pf.account">Tài khoản</span></p>
+              <h1 class="mb-4 bread" id="hero-username">Tài khoản</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section bg-light py-5">
+      <div class="container">
+
+        <!-- Tab Nav -->
+        <ul class="nav profile-tab-nav border-bottom mb-4" id="profile-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-tab="account">
+              <span class="ion-ios-person mr-1"></span> <span data-i18n="pf.account">Tài khoản</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="hotel-bookings">
+              <span class="ion-ios-bed mr-1"></span> <span data-i18n="pf.hotelBookings">Đặt phòng</span>
+              <span class="badge badge-pill badge-secondary ml-1" id="badge-hotel" style="display:none"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="apartment-bookings">
+              <span class="ion-ios-home mr-1"></span> <span data-i18n="pf.aptBookings">Đặt căn hộ</span>
+              <span class="badge badge-pill badge-secondary ml-1" id="badge-apt" style="display:none"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="tour-bookings">
+              <span class="ion-ios-map mr-1"></span> <span data-i18n="pf.tourBookings">Đặt tour</span>
+              <span class="badge badge-pill badge-secondary ml-1" id="badge-tour" style="display:none"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="payments">
+              <span class="ion-ios-card mr-1"></span> <span data-i18n="pf.payments">Thanh toán</span>
+              <span class="badge badge-pill badge-secondary ml-1" id="badge-payment" style="display:none"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="vouchers">
+              <span class="ion-ios-pricetag mr-1"></span> <span data-i18n="nav.vouchers">Voucher</span>
+              <span class="badge badge-pill badge-secondary ml-1" id="badge-voucher" style="display:none"></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- ===== TAB: ACCOUNT ===== -->
+        <div class="tab-section active" id="tab-account">
+          <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5 mb-4">
+              <div class="bg-white p-4 rounded shadow-sm">
+                <h5 class="font-weight-bold mb-4" data-i18n="pf.accountInfo">Thông tin tài khoản</h5>
+                <div id="profile-loading" class="text-center py-3"><p data-i18n="common.loading">Đang tải...</p></div>
+                <div id="profile-info" style="display:none">
+                  <div class="mb-3">
+                    <small class="text-muted" data-i18n="pf.fullName">Họ tên</small>
+                    <p id="profile-name" class="font-weight-bold mb-0"></p>
+                  </div>
+                  <hr class="my-2">
+                  <div class="mb-3">
+                    <small class="text-muted" data-i18n="pf.email">Email</small>
+                    <p id="profile-email" class="font-weight-bold mb-0"></p>
+                  </div>
+                  <hr class="my-2">
+                  <div class="mb-3">
+                    <small class="text-muted" data-i18n="pf.role">Vai trò</small>
+                    <p id="profile-role" class="font-weight-bold mb-0"></p>
+                  </div>
+                  <hr class="my-2">
+                  <div class="mb-0">
+                    <small class="text-muted" data-i18n="pf.createdAt">Ngày tạo</small>
+                    <p id="profile-created" class="font-weight-bold mb-0"></p>
+                  </div>
+                </div>
+                <div id="profile-error" style="display:none" class="alert alert-danger small"></div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-5 mb-4">
+              <div class="bg-white p-4 rounded shadow-sm">
+                <h5 class="font-weight-bold mb-4" data-i18n="pf.changePassword">Đổi mật khẩu</h5>
+                <div id="password-msg" style="display:none" class="mb-3 small"></div>
+                <form id="change-password-form">
+                  <div class="form-group">
+                    <label class="small" data-i18n="pf.currentPassword">Mật khẩu hiện tại</label>
+                    <input type="password" name="currentPassword" class="form-control" data-i18n-placeholder="pf.currentPasswordPh" placeholder="Nhập mật khẩu hiện tại" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="small" data-i18n="pf.newPassword">Mật khẩu mới</label>
+                    <input type="password" name="newPassword" class="form-control" data-i18n-placeholder="auth.pwMin" placeholder="Ít nhất 6 ký tự" required minlength="6">
+                  </div>
+                  <div class="form-group">
+                    <label class="small" data-i18n="pf.confirmPassword">Xác nhận mật khẩu mới</label>
+                    <input type="password" name="confirmPassword" class="form-control" data-i18n-placeholder="pf.confirmPasswordPh" placeholder="Nhập lại mật khẩu mới" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block py-3" data-i18n="pf.updatePassword">Cập nhật mật khẩu</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: HOTEL BOOKINGS ===== -->
+        <div class="tab-section" id="tab-hotel-bookings">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="font-weight-bold mb-0" data-i18n="pf.hotelHistory">Lịch sử đặt phòng</h5>
+          </div>
+          <div id="hotel-bookings-list"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div></div></div>
+        </div>
+
+        <!-- ===== TAB: APARTMENT BOOKINGS ===== -->
+        <div class="tab-section" id="tab-apartment-bookings">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="font-weight-bold mb-0" data-i18n="pf.aptHistory">Lịch sử đặt căn hộ</h5>
+          </div>
+          <div id="apartment-bookings-list"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div></div></div>
+        </div>
+
+        <!-- ===== TAB: TOUR BOOKINGS ===== -->
+        <div class="tab-section" id="tab-tour-bookings">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="font-weight-bold mb-0" data-i18n="pf.tourHistory">Lịch sử đặt tour</h5>
+          </div>
+          <div id="tour-bookings-list"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div></div></div>
+        </div>
+
+        <!-- ===== TAB: PAYMENTS ===== -->
+        <div class="tab-section" id="tab-payments">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="font-weight-bold mb-0" data-i18n="pf.paymentHistory">Lịch sử thanh toán</h5>
+          </div>
+          <div id="payments-list"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div></div></div>
+        </div>
+
+        <!-- ===== TAB: VOUCHERS ===== -->
+        <div class="tab-section" id="tab-vouchers">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="font-weight-bold mb-0" data-i18n="vh.tabMy">Voucher của tôi</h5>
+            <a href="vouchers.html" class="btn btn-outline-warning btn-sm">
+              <span class="ion-ios-pricetag"></span> <span data-i18n="pf.buyMore">Mua thêm voucher</span>
+            </a>
+          </div>
+          <div id="vouchers-list"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div></div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Booking Detail Modal -->
+    <div class="modal fade" id="bookingDetailModal" tabindex="-1" role="dialog" aria-labelledby="bookingDetailModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
+          <div class="modal-header bg-light border-bottom-0 pb-0">
+            <h5 class="modal-title font-weight-bold" id="bookingDetailModalLabel" style="color: #222;" data-i18n="pf.bookingDetailsTitle">Chi tiết đặt dịch vụ</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 24px; padding: 15px 20px;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="text-center mb-4" id="qr-header-wrapper">
+              <div class="d-inline-block p-3 bg-white border rounded shadow-sm mb-2" style="border-radius: 12px; background: #fff;">
+                <img id="detail-modal-qr" src="" style="width: 150px; height: 150px; object-fit: contain; display: none;" alt="QR Code">
+                <div id="detail-qr-loading" class="spinner-border spinner-border-sm text-warning" role="status" style="width: 2rem; height: 2rem;">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+              <p class="text-muted small mb-0 font-weight-bold" data-i18n="pf.qrDescription">Mã QR Check-in</p>
+            </div>
+            <div id="booking-detail-body" style="font-size: 14px; color: #444;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+          <div class="modal-footer border-top-0 pt-0 bg-light">
+            <button type="button" class="btn btn-secondary px-4" data-dismiss="modal" style="border-radius: 20px;" data-i18n="vh.close">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/scrollax.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/header.js"></script>
+    <script src="assets/js/includes.js"></script>
+    <script src="assets/js/profile.js?v=3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="assets/js/CustomAlert.js"></script>
+</body>
+</html>
