@@ -7,26 +7,38 @@ Dự án LumiForest là một nền tảng đặt phòng khách sạn, căn hộ
 ## 1. Các Luồng Hoạt Động Chính (Web Flows)
 
 ### Luồng Khách Hàng (Customer Flow)
-- **Xác thực (Authentication):**
-  - **Đăng ký (Register):** Đăng ký tài khoản qua Email có xác thực OTP.
-  - **Đăng nhập (Login):** Bằng tài khoản thường hoặc bằng tài khoản Google (Google Identity Services).
-  - **Quên mật khẩu:** Cấp lại mật khẩu qua OTP.
-- **Tìm kiếm & Khám phá:** Tìm kiếm khách sạn, căn hộ, phòng, tour, voucher với bộ lọc linh hoạt (giá, số người, hạng sao).
-- **Đặt dịch vụ (Booking Flow):**
-  - Xem chi tiết phòng/tour/căn hộ.
-  - Nếu đã đăng nhập, hệ thống tự động điền thông tin khách hàng vào form.
-  - Sau khi chốt đơn, người dùng được chuyển đến luồng thanh toán.
+- **Xác thực & Bảo mật:** Đăng ký (yêu cầu xác thực mã OTP gửi qua Email), Đăng nhập, Quên mật khẩu. Hệ thống có bảo vệ chống brute-force (rate limiting) và sử dụng JWT.
+- **Khám phá & Tương tác:** Xem và tìm kiếm Khách sạn, Phòng, Căn hộ, Tour du lịch, Voucher, và đọc Blog.
+- **Wishlist & Thông báo:** Lưu dịch vụ yêu thích vào Wishlist, nhận và quản lý thông báo cá nhân.
+- **Đánh giá (Review System):** Viết, chỉnh sửa, và xóa đánh giá cá nhân (dữ liệu được tự động sanitize chống XSS).
+- **Liên hệ hỗ trợ:** Gửi form liên hệ/yêu cầu hỗ trợ (Contact Inquiries).
+- **Đặt dịch vụ (Booking & Voucher Flow):**
+  - Nhận (claim), mua lẻ Voucher và áp dụng vào đơn đặt hàng.
+  - **Mua sỉ Voucher Doanh nghiệp:** Khi mua voucher, khách hàng có thể chọn mua số lượng lớn cho doanh nghiệp và upload danh sách nhân viên bằng file Excel để hệ thống tự động phân bổ.
+    - *Định dạng file Excel:* Bắt buộc phải có các cột: `Full Name`, `Email`, `Phone Number`, `Address`.
+    - *Tự động hóa:* Ngay sau khi xử lý file, hệ thống sẽ tự động gửi Email chứa mã QR Code độc quyền và đường link sử dụng đến từng nhân viên có trong danh sách. Nhân viên sau đó có thể redeem để sử dụng.
+  - Tiến hành đặt dịch vụ (Khách sạn, Căn hộ, Tour). Sau khi đặt thành công, hệ thống luôn tự động gửi Email xác nhận chi tiết đơn hàng cho khách.
+  - Quản lý lịch sử và trạng thái các đơn đặt chỗ của cá nhân.
 - **Thanh toán (Payment Flow):**
-  - Thanh toán thông qua việc quét mã QR ngân hàng.
-  - Sau khi thanh toán thành công, người dùng tải lên ảnh chụp màn hình (biên lai chuyển khoản).
-  - Backend sử dụng API của ngân hàng (ví dụ SeABank) để lắng nghe biến động số dư. Sau khi giao dịch khớp, hệ thống tự động:
-    1. Cập nhật trạng thái `payment_status` thành `PAID` và `booking_status` thành `CONFIRMED`.
-    2. Gửi Email đính kèm hóa đơn (Invoice PDF + QR Code) cho khách hàng.
-    3. Hủy bỏ các booking trùng lịch tự động để tránh overbooking.
+  - *Lưu ý: Tính năng thanh toán hiện tại đang được giả lập (Mockup).*
+  - Người dùng thực hiện thao tác xác nhận thanh toán trên giao diện hệ thống (chưa tích hợp cổng thanh toán thực tế hay mã QR).
+  - *Định hướng phát triển tương lai:*
+    1. Tích hợp thanh toán thông qua việc quét mã QR ngân hàng.
+    2. Upload ảnh biên lai chuyển khoản.
+    3. Backend sử dụng API của ngân hàng để tự động đối soát giao dịch, cập nhật trạng thái `PAID`/`CONFIRMED`, gửi Email hóa đơn (PDF + QR) và xử lý chống overbooking.
 
-### Luồng Nhân Viên (Staff Flow) / Quản trị viên (Admin Flow)
-- Truy cập vào `/staff/index.html` hoặc `/admin-dashboard/index.html`.
-- Quản lý danh sách đặt phòng, tour, trạng thái thanh toán, duyệt thanh toán bằng tay (trong trường hợp tự xử lý), theo dõi doanh thu và phản hồi từ khách hàng.
+
+### Luồng Nhân Viên (Staff Flow)
+- **Quản lý Dữ liệu:** Thêm/Sửa (không có quyền xóa) nội dung Khách sạn, Căn hộ, Phòng, Tour, Voucher, Bài viết Blog.
+- **Quản lý Đơn hàng:** Xem và xử lý tất cả các booking hệ thống (như Check-in, Check-out, Cập nhật trạng thái).
+- **Chăm sóc Khách hàng:** Xem (không được sửa) các giao dịch thanh toán để hỗ trợ khách, xem danh sách Contact Inquiries, và kiểm duyệt (xóa) các đánh giá vi phạm.
+
+### Luồng Quản Trị Viên (Admin Flow)
+- **Quản lý Toàn diện Dữ liệu:** Có toàn quyền Thêm/Sửa và Độc quyền Xóa (Soft Delete) đối với mọi tài nguyên hệ thống.
+- **Quản lý Người dùng & Phân quyền:** Xem danh sách, khóa/mở khóa (ban/unban) tài khoản, cấp lại quyền (Role) với cơ chế an toàn chống tự hạ cấp.
+- **Tài chính & Thống kê:** Quản trị doanh thu hệ thống, có đặc quyền xử lý Hoàn tiền (Refund) và bắt buộc cập nhật các trạng thái thanh toán.
+- **Cấu hình Website:** Cho phép cập nhật các thông tin chung và thay đổi hình ảnh hiển thị trên toàn hệ thống web.
+- **Kiểm toán An ninh:** Theo dõi Nhật ký hệ thống (Audit Logs) tự động ghi lại mọi thao tác nhạy cảm của Admin.
 
 ---
 
@@ -142,6 +154,6 @@ Dự án LumiForest là một nền tảng đặt phòng khách sạn, căn hộ
 ## 5. Lưu ý cho người mới (Onboarding Notes)
 
 - **Ngôn ngữ:** Website sử dụng cơ chế nội địa hóa tự viết tay (file `assets/js/i18n.js`). Các thẻ có thuộc tính `data-i18n="..."` sẽ tự động được dịch bằng JS. Nút đổi ngôn ngữ nằm trên Navbar. Nút Đăng nhập Google cũng tự động đổi ngôn ngữ theo web.
-- **Luồng xử lý bất đồng bộ:** Việc gửi mail hóa đơn và tạo QR code ở Backend đã được đưa vào `(async () => {})()` để không chặn thời gian phản hồi (response time) từ callback của ngân hàng.
+- **Luồng xử lý bất đồng bộ:** (Định hướng) Việc gửi mail hóa đơn và các tác vụ liên quan đến thanh toán sau này sẽ được xử lý bất đồng bộ để không chặn thời gian phản hồi (response time) từ callback của ngân hàng.
 - **Token:** Đăng nhập dùng cả `accessToken` (để gọi API) và `refreshToken` (để xin cấp mới khi hết hạn 15 phút).
 
