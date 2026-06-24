@@ -21,13 +21,7 @@ Dự án LumiForest là một nền tảng đặt phòng khách sạn, căn hộ
   - Quản lý lịch sử và trạng thái các đơn đặt chỗ của cá nhân.
 - **Thanh toán (Payment Flow):**
   - *Lưu ý: Tính năng thanh toán hiện tại đang được giả lập (Mockup).*
-  - Người dùng thực hiện thao tác xác nhận thanh toán trên giao diện hệ thống (chưa tích hợp cổng thanh toán thực tế hay mã QR).
-  - *Định hướng phát triển tương lai:*
-    1. Tích hợp thanh toán thông qua việc quét mã QR ngân hàng.
-    2. Upload ảnh biên lai chuyển khoản.
-    3. Backend sử dụng API của ngân hàng để tự động đối soát giao dịch, cập nhật trạng thái `PAID`/`CONFIRMED`, gửi Email hóa đơn (PDF + QR) và xử lý chống overbooking.
-
-
+  
 ### Luồng Nhân Viên (Staff Flow)
 - **Quản lý Dữ liệu:** Thêm/Sửa (không có quyền xóa) nội dung Khách sạn, Căn hộ, Phòng, Tour, Voucher, Bài viết Blog.
 - **Quản lý Đơn hàng:** Xem và xử lý tất cả các booking hệ thống (như Check-in, Check-out, Cập nhật trạng thái).
